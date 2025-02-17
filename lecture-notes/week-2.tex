@@ -1,0 +1,767 @@
+\section{Gaussian Elimination}
+The idea behind \textbf{Gaussian Elimination} is to solve linear systems
+for the pivot variables in terms of free variables (if any) in the equation
+\\
+Specifically, Gaussian Elimination is an \textbf{algorithm} or process used
+to solve linear systems backed behind matrices
+\begin{enumerate}
+  \item Write down the augmented matrix
+  \item Find the RREF (reduced row echelon form) of the matrix
+  \item Write down the equations corresponding to the RREF
+  \item Express pivot variables in terms of free variables
+\end{enumerate}
+\subsection{Example}
+Find the general solution of
+\[
+\begin{aligned}
+  &3x_1 - 7x_2 + 8x_3 - 5x_4 + 8x_5 = 9 \\
+  &3x_1 - 9x_2 + 12x_3 - 9x_4 + 6x_5 = 15
+\end{aligned}
+\]
+The solution simply involves following the Gaussian Elimination algorithm
+\begin{enumerate}
+  \item Write down the augmented matrix
+    \[
+    \left[
+      \begin{array}{ccccc|c}
+        3 & -7 & 8 & -5 & 8 & 9 \\
+        3 & -9 & 12 & -9 & 6 & 15
+      \end{array}
+    \right]
+    \]
+  \item Find the RREF of the matrix
+    \[
+    \left[
+      \begin{array}{ccccc|c}
+        1 & 0 & -2 & 3 & 5 & -4 \\
+        0 & 1 & -2 & 2 & 1 & -3
+      \end{array}
+    \right]
+    \]
+  \item Write down equations corresponding to the RREF
+    \[
+      \begin{aligned}
+        &x_1 = -2x_3 + 3x_4 + 5x_5 = -4 \\
+        &x_2 = -2x_3 + 2x_4 + x_5 = -3
+      \end{aligned}
+    \] 
+  \item Express pivot variables in terms of free variables
+    \[
+      \begin{aligned}
+        &x_1 = 2x_3 - 3x_4 - 5x_5 - 4 \\
+        &x_2 = 2x_3 - 2x_4 - x_5 - 3 \\
+        &x_3, x_4, x_5 = \text{free}
+      \end{aligned}
+    \]
+\end{enumerate}
+\subsection{Theorem 1}
+A linear system is \textbf{consistent} if and only if an echelon form of
+the augmented matrix has no row of the form $\left[\begin{array}{ccc|c} 0 
+& \cdots & 0 & b \end{array}\right]$, where $b$ is nonzero. \\\\
+Linear systems are consistent when
+\begin{enumerate}
+  \item There is a \textbf{unique} solution (no free variables)
+  \item Infinitely \textbf{many} solutions (at least one free variable)
+\end{enumerate}
+\subsubsection{Example}
+If a linear system has an augmented matrix of
+$\left[\begin{array}{cc|c}
+  3 & 4 & -3 \\
+  3 & 4 & -3 \\
+  6 & 8 & -5
+\end{array}\right]$, what can be inferred about the number of solutions in the
+system? \\\\\\
+\textbf{Solution} \\\\
+Convert matrix to echelon form
+$\left[\begin{array}{cc|c}
+  3 & 4 & -3 \\
+  3 & 4 & -3 \\
+  6 & 8 & -5
+\end{array}\right] \rightarrow
+\left[\begin{array}{cc|c}
+  3 & 4 & -3 \\
+  0 & 0 & 0 \\
+  0 & 0 & 1
+\end{array}\right]$ \\\\\\
+There is no solution because of the $\left[\begin{array}{cc|c}
+  0 & 0 & 1
+\end{array}\right]$ row (the bottom row in the echelon form of
+the original matrix) \\\\
+As a linear equation, this row is equivalent to $0x_1 + 0x_2 = 1$, 
+which is an equation that has no solution!
+
+\section{Linear Combinations}
+Consider the $m \times n$ matrices $A = \begin{bmatrix}
+    a_{11} & a_{12} & \dots & a_{1n} \\
+    a_{21} & a_{22} & \dots & a_{2n} \\
+    \dots & \dots & \ddots & \dots \\
+    a_{m1} & a_{m2} & \dots & a_{mn}
+  \end{bmatrix}$, and $B = \begin{bmatrix}
+    b_{11} & b_{12} & \dots & b_{1n} \\
+    b_{21} & b_{22} & \dots & b_{2n} \\
+    \dots & \dots & \ddots & \dots \\
+    b_{m1} & b_{m2} & \dots & b_{mn}
+  \end{bmatrix}$
+\subsection{Sum and Scalar Product}
+The \textbf{sum} of $A + B$ would be 
+\[
+  \begin{bmatrix}
+    a_{11} + b_{11} & a_{12} + b_{12} & \dots & a_{1n} + b_{1n} \\
+    a_{21} + b_{21} & a_{22} + b_{22} & \dots & a_{2n} + b_{2n} \\
+    \dots & \dots & \ddots & \dots \\
+    a_{m1} + b_{m1} & a_{m2} + b_{m2} & \dots & a_{mn} + b_{mn}
+  \end{bmatrix}
+\] 
+Similarly, the \textbf{product} $cA$ for a scalar $c$ is
+\[
+  \begin{bmatrix}
+    ca_{11} & ca_{12} & \dots & ca_{1n} \\
+    ca_{21} & ca_{22} & \dots & ca_{2n} \\
+    \dots & \dots & \ddots & \dots \\
+    ca_{m1} & ca_{m2} & \dots & ca_{mn}
+  \end{bmatrix}
+\]
+\subsubsection{Adding Matrices Example}
+\[
+  \begin{bmatrix}
+    1 & 0 \\
+    5 & 2
+  \end{bmatrix} + 
+  \begin{bmatrix}
+    2 & 3 \\
+    3 & 1
+  \end{bmatrix} =
+  \begin{bmatrix}
+    1 + 2 & 0 + 3 \\
+    5 + 3 & 2 + 1
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    3 & 3 \\
+    8 & 3
+  \end{bmatrix}
+\]
+\subsubsection{Scalar Multiplying Matrices Example}
+\[
+  5 \begin{bmatrix}
+    2 & 1 & 0 \\
+    3 & 1 & -1
+  \end{bmatrix} = \begin{bmatrix}
+    5 \cdot 2 & 5 \cdot 1 & 5 \cdot 0 \\
+    5 \cdot 3 & 5 \cdot 1 & 5 \cdot -1
+  \end{bmatrix} = \begin{bmatrix}
+    10 & 5 & 0 \\
+    15 & 5 & -5
+  \end{bmatrix}
+\]
+\subsection{Row and Column Vectors}
+\textbf{Column Vectors} are $m \times 1$-matrices, while \textbf{Row Vectors}
+are $1 \times n$-matrices
+\subsubsection{Examples of Row and Column Vectors}
+\[
+  \begin{bmatrix}
+    1 \\
+    2
+  \end{bmatrix} \quad
+  \begin{bmatrix}
+    1 & 2
+  \end{bmatrix} \quad
+  \begin{bmatrix}
+    0 \\
+    -2 \\
+    3
+  \end{bmatrix} \quad
+  \begin{bmatrix}
+    1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9
+  \end{bmatrix}
+\]
+\subsection{Transpose}
+If $A$ is $m \times n$, the \textbf{transpose} of $A$ is the $n \times m$ matrix,
+denoted by $A^T$, whose columns are formed from the corresponding rows of $A$. In 
+terms of matrix elements: $(A^T)_{ij} = A_{ji}$ \\
+\subsubsection{Figuring out the Transpose of a Matrix}
+What is the transpose of $A = \begin{bmatrix}
+  1 & 2 \\
+  3 & 4 \\
+  5 & 6
+\end{bmatrix}$? \\\\
+In a transpose, the rows of the original matrix simply become the columns of the 
+transposed matrix \\\\
+\[
+  A^T = \begin{bmatrix}
+    1 & 3 & 5 \\
+    2 & 4 & 6
+  \end{bmatrix}
+\]
+\subsection{Span}
+The \textbf{linear combination} of $m \times n$-matrices $A_1, A_2, \dots, A_p$
+with \textbf{coefficients} $c_1, c_2, \dots, c_p$ is defined as
+\[
+  c_1A_1 + c_2A_2 + \dots + c_pA_p
+\] 
+For example, for $m \times n$-matrices $A_1$ and $A_2$, some examples of linear combinations of these two matrices are
+\[
+  3A_1 + 2A_2 \quad A_1 - 2A_2 \quad \frac{1}{3}A_1 = \frac{1}{3}A_1 + 0A_2
+\]
+The \textbf{span} $(A_1, \dots, A_p)$ is defined as the set of all 
+linear combinations of $A_1, \dots, A_p$, or simply
+\[
+  \text{span}(A_1,\dots,A_p) := \{c_1A_1 + c_2A_2 + \dots + c_pA_p : 
+  c_1, \dots, c_p \text{ scalars} \}
+\] \\\\ 
+The \textbf{set} of all column vectors of length m is represented
+as $\mathbb{R}^m$ \\
+For example, let $a_1 = \begin{bmatrix}
+  1 \\ 0 \\ 3
+\end{bmatrix}, a_2 = \begin{bmatrix}
+  4 \\ 2 \\ 14
+\end{bmatrix}$, and $b = \begin{bmatrix}
+  -1 \\ 8 \\ -5
+\end{bmatrix}$. Is $b$ a linear combination of $a_1, a_2$? \\\\\\
+Find $x_1, x_2$ such that
+\[
+  x_1\begin{bmatrix}
+    1 \\ 0 \\ 3
+  \end{bmatrix} + x_2\begin{bmatrix}
+    4 \\ 2 \\ 14
+  \end{bmatrix} = \begin{bmatrix}
+    -1 \\ 8 \\ -5
+  \end{bmatrix}
+\] \\
+\begin{enumerate}
+  \item Form the system of equations
+    \[
+      \begin{aligned}
+        &x_1 + 4x_2 = -1 \\
+        &0x_1 + 2x_2 = 8 \\
+        &3x_1 + 14x_2 = -5
+      \end{aligned}
+    \]
+  \item Form the augmented matrix
+    \[ \left[
+      \begin{array}{cc|c}
+        1 & 4 & -1 \\
+        0 & 2 & 8 \\
+        3 & 14 & -5
+      \end{array}
+    \right] \]
+  \item Compute the echelon form
+    \[ \left[
+      \begin{array}{cc|c}
+        1 & 4 & -1 \\
+        0 & 2 & 8 \\
+        0 & 2 & -2
+      \end{array}
+    \right] \rightarrow \left[ 
+      \begin{array}{cc|c}
+        1 & 4 & -1 \\
+        0 & 2 & 8 \\
+        0 & 0 & -10
+      \end{array} \right]
+    \]
+\end{enumerate}
+With this echelon form matrix, it can be concluded that $b$ is not a linear
+combination of $a_1$ and $a_2$ because the system is inconsistent \\\\
+This means that there is no solution that exists for the bottom row linear equation
+\[
+  0x_1 + 0x_2 = -10
+\]
+Therefore, this means that there is no solution that exists for the 
+derived linear system
+\textbf{and} the original vector equation,  
+  $x_1\begin{bmatrix}
+    1 \\ 0 \\ 3
+  \end{bmatrix} + x_2\begin{bmatrix}
+    4 \\ 2 \\ 14
+  \end{bmatrix} = \begin{bmatrix}
+    -1 \\ 8 \\ -5
+  \end{bmatrix}$ \\\\
+Geometrically speaking, this means that $b$ is not in the span of $a_1$ and $a_2$
+\subsection{TTK - Things to Know}
+Solving linear systems is the same as finding linear combinations! \\\\
+\textbf{Theorem 1} - A vector equation
+\[
+  x_1a_1 + x_2a_2 + \cdots + x_na_n = b
+\]
+has the same solution set as the linear system whose augmented matrix is
+\[ \left[
+  \begin{array}{cccc|c}
+    a_1 & a_2 & \cdots & a_n & b
+  \end{array}
+\right] \]
+In particular, $b$ can be generated by a linear combination of $a_1, a_2, \cdots,
+a_n$ if and only if there is a solution to the linear system corresponding to
+the augmented matrix \\\\
+A matrix is defined in terms of its \textbf{colums} or \textbf{rows}
+\[
+  A := \begin{bmatrix}
+      a_1 & a_2 & \cdots & a_n
+  \end{bmatrix} \quad \text{or}
+  A := \begin{bmatrix}
+      R_1 \\ R_2 \\ \vdots \\ R_m
+  \end{bmatrix}
+\]
+
+\section{Matrix Vector Multiplication}
+Suppose $x$ is a vector in $\mathbb{R}^m$ and $A = \begin{bmatrix}
+  a_1 & \dots & a_n
+\end{bmatrix}$ an $m \times n$-matrix. The product $Ax$ is defined by
+\[
+  Ax = x_1a_1 + x_2a_2 + \dots + x_na_n
+\]
+\begin{itemize}
+  \item $Ax$ is a linear combination of the columns of $A$ using the entries 
+    in $x$ as coefficients.
+  \item $Ax$ is only defined if the number of entries of $x$ is equal to
+    the number of columns of $A$
+\end{itemize}
+\subsection{Example Problem}
+If $A = \begin{bmatrix}
+  2 & 0 \\
+  1 & 1
+\end{bmatrix}$, $B = \begin{bmatrix}
+  1 & 2 \\
+  0 & 1 \\
+  3 & 5
+\end{bmatrix}$, and $x = \begin{bmatrix}
+  2 \\ 3
+\end{bmatrix}$, determine $Ax$ and $Bx$
+\\\\[8pt]
+\[
+  Ax = \begin{bmatrix}
+    2 & 0 \\
+    1 & 1
+  \end{bmatrix} \begin{bmatrix}
+    2 \\ 3
+  \end{bmatrix} = 2 \begin{bmatrix}
+    2 \\ 1
+  \end{bmatrix} + 3 \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix} = \begin{bmatrix}
+    4 \\ 2
+  \end{bmatrix} + \begin{bmatrix}
+    0 \\ 3
+  \end{bmatrix} = \begin{bmatrix}
+    4 \\ 5
+  \end{bmatrix}
+\]
+\[
+  Bx = \begin{bmatrix}
+    1 & 2 \\
+    0 & 1 \\
+    3 & 5
+  \end{bmatrix} \begin{bmatrix}
+    2 \\ 3
+  \end{bmatrix} = 2 \begin{bmatrix}
+    1 \\ 0 \\ 3
+  \end{bmatrix} + 3 \begin{bmatrix}
+    2 \\ 1 \\ 5
+  \end{bmatrix} = \begin{bmatrix}
+    8 \\ 3 \\ 21
+  \end{bmatrix}
+\]
+\subsection{Example Problem 2}
+Consider the vector equation 
+\[
+  x_1 \begin{bmatrix}
+    1 \\ 2
+  \end{bmatrix} + x_2 \begin{bmatrix}
+    3 \\ 4
+  \end{bmatrix} = \begin{bmatrix}
+    0 \\ 2
+  \end{bmatrix}
+\]
+\\[8pt]
+Find a $2 \times 2$ matrix $A$ such that $(x_1, x_2)$ is a solution to the above
+equation if and only if
+\[
+  A \begin{bmatrix}
+    x_1 \\ x_2
+  \end{bmatrix} = \begin{bmatrix}
+    0 \\ 2
+  \end{bmatrix}?
+\]
+\\[8pt]
+Take $A = \begin{bmatrix}
+  1 & 3 \\
+  2 & 4
+\end{bmatrix}$. Form a linear equation with $A$
+using a linear combination $Ax$, where $x$ represents the column vector
+of unknown variables
+\[
+  Ax = \begin{bmatrix}
+    1 & 3 \\
+    2 & 4
+  \end{bmatrix} \begin{bmatrix}
+    x_1 \\ x_2
+  \end{bmatrix} = x_1 \begin{bmatrix}
+    1 \\ 2
+  \end{bmatrix} + x_2 \begin{bmatrix}
+    3 \\ 4
+  \end{bmatrix}
+\]
+$x_1 \begin{bmatrix}
+  1 \\ 2
+\end{bmatrix} + x_2 \begin{bmatrix}
+  3 \\ 4
+\end{bmatrix}$ is the vector expression that matches the problem statement and
+we know that it is equivalent to the column vector $\begin{bmatrix}
+  0 \\ 2
+\end{bmatrix}$. $A \begin{bmatrix}
+  x_1 \\ x_2
+\end{bmatrix}$ is also equivalent to to the column vector $\begin{bmatrix}
+  0 \\ 2
+\end{bmatrix}$. 
+\\[8pt]
+Therefore one possible $2 \times 2$ matrix is $\begin{bmatrix}
+  1 & 2 \\
+  3 & 4
+\end{bmatrix}$
+\subsection{Theorems and Vocab}
+Let $A = \begin{bmatrix}
+  a_1, \cdots, a_n
+\end{bmatrix}$ be an $m \times n$-matrix and b in $\mathbb{R}^m$. The the following
+are equivalent
+\begin{itemize}
+  \item $(x_1, x_2, \dots, x_n)$ is a solution of the vector equation, $x_1a_1 + x_2a_2 + \cdots x_na_n = b$
+  \item $\begin{bmatrix}
+    x_1 \\
+    \vdots \\
+    x_n
+  \end{bmatrix}$ is a solution to the matrix equation, $Ax = b$
+  \item $(x_1, x_2, \dots, x_n)$ is a solution of the system with augmented
+    matrix, $\left[ \begin{array}{c|c}
+      A & b
+  \end{array} \right]$
+\end{itemize}
+\\[8pt]
+The notation for the system of equations with augmented matrix $\begin{bmatrix}
+  A & b
+\end{bmatrix}$ will be written as $Ax = b$
+\subsection{Matrices as Machines}
+Let $A$ be a $m \times n$ matrix.
+\begin{enumerate}
+  \item Input: $n$-component vector $x \in \mathbb{R}^m$
+  \item Output: $m$-component vector $b = Ax \in \mathbb{R}^m$
+\end{enumerate}
+For example, consider the matrix $A = \begin{bmatrix}
+  0 & 1 \\
+  1 & 0
+\end{bmatrix}$. What does this machine do?
+\\[8pt]
+\textbf{Solution}
+\begin{enumerate}
+  \item Let $x = \begin{bmatrix}
+  x_1 \\ x_2
+\end{bmatrix}$ be our input
+\[
+  Ax = \begin{bmatrix}
+    0 & 1 \\ 1 & 0
+  \end{bmatrix} = x_1 \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix} + x_2 \begin{bmatrix}
+    1 \\ 0
+  \end{bmatrix} = \begin{bmatrix}
+    x_2 \\ x_1
+  \end{bmatrix}
+\]
+  \item Therefore, the machine $A$ switches the entries of the vector $x$
+\end{enumerate}
+\\[8pt]
+Geometrically speaking, this machine reflects across the $x_1 = x_2$-line
+\subsection{Composition of Machines}
+Let $A$ be an $m \times n$ matrix and $B$ be an $k \times l$ matrix. Now we 
+can compose the two machines 
+\\[8pt]
+However, this composition only works for some $k, l, m, n$. For which?
+\\[8pt]
+\textbf{Solution}
+\begin{itemize}
+  \item If $A$ is an $m \times n$-matrix and $x$ in $\mathbb{R}^n$, 
+  then $Ax$ is in $\mathbb{R}^m$
+  \item In order to calculate $B(Ax)$ when then need $B$ to have $m$ columns.
+  \item So we need $l = m$. Both $n$ and $k$ can be arbitrary.
+\end{itemize}
+\subsubsection{Worked Example}
+Let $A = \begin{bmatrix}
+  0 & 1 \\
+  1 & 0
+\end{bmatrix}$ and $B = \begin{bmatrix}
+  1 & 0 \\
+  0 & 0
+\end{bmatrix}$ be as before. Is $A(Bx) = B(Ax)$?
+\\[8pt]
+\textbf{Solution}
+No, projection and reflection do not commute!
+\[
+  A(B\begin{bmatrix}
+    1 \\ 2
+  \end{bmatrix}) = A \begin{bmatrix}
+    1 \\ 0
+  \end{bmatrix} = \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix} \quad
+  B(A\begin{bmatrix}
+    1 \\ 2
+  \end{bmatrix}) = B \begin{bmatrix}
+    2 \\ 1
+  \end{bmatrix} = \begin{bmatrix}
+    2 \\ 0
+  \end{bmatrix}
+\]
+
+\section{Matrix Multiplication}
+Let $A$ be an $m \times n$ matrix and let $B = \begin{bmatrix}
+  b_1 \dots b_p
+\end{bmatrix}$ be an $n \times p$-matrix. We define
+\[
+  AB := \begin{bmatrix}
+    Ab_1 & Ab_2 & \dots & Ab_p
+  \end{bmatrix}
+\]
+\\[8pt]
+Compute AB where $A = \begin{bmatrix}
+  4 & -2 \\
+  3 & -5 \\
+  0 & 1
+\end{bmatrix}$ and $B = \begin{bmatrix}
+  2 & -3 \\
+  6 & -7
+\end{bmatrix}$
+\\[8pt]
+\textbf{Solution}
+\[
+  &Ab_1 = \begin{bmatrix}
+      4 & -2 \\
+      3 & -5 \\
+      0 & 1 
+    \end{bmatrix} \begin{bmatrix}
+      2 \\ 6
+    \end{bmatrix} = 2 \begin{bmatrix}
+      4 \\ 3 \\ 0 
+    \end{bmatrix} + 6 \begin{bmatrix}
+      -2 \\ -5 \\ 1
+    \end{bmatrix} = \begin{bmatrix}
+      -4 \\ -24 \\ 6
+    \end{bmatrix}
+\] 
+\[
+  Ab_2 = \begin{bmatrix}
+      4 & -2 \\
+      3 & -5 \\
+      0 & 1
+    \end{bmatrix} \begin{bmatrix}
+      -3 \\ -7
+    \end{bmatrix} = -3 \begin{bmatrix}
+      4 \\ 3 \\ 0
+    \end{bmatrix} - 7 \begin{bmatrix}
+      -2 \\ -5 \\ 1
+    \end{bmatrix} = \begin{bmatrix}
+      2 \\ 26 \\ -7
+    \end{bmatrix}
+\]
+These are the columns of the product matrix, where $AB = \begin{bmatrix}
+  -4 & 2 \\
+  -24 & 26 \\
+  6 & -7
+\end{bmatrix}$
+\\[8pt]
+Note that $Ab_1$ and $Ab_2$ are linear combinations of the columns of $A$. This 
+means that each column of $AB$ is a linear combination of the columns of $A$ using
+coefficients from the corresponding columns of $B$
+\subsection{Worked Example}
+Let $A$ be an $m \times n$ matrix and let $B$ be an $n \times p$-matrix. We define
+\[
+  AB := \begin{bmatrix}
+    Ab_1 & Ab_2 & \dots & Ab_p
+  \end{bmatrix}
+\]
+If $C$ is a $4 \times 3$ and $D$ is a $3 \times 2$, are $CD$ and $DC$ defined?
+What are their sizes or dimensions?
+\\[8pt]
+\textbf{Solution}
+\begin{enumerate}
+  \item The product $AB$ can only be defined if $B$ has as many rows as $A$ has 
+    columns
+  \item If this is the case, then $AB$ has as many rows as $A$ and as many columns 
+    as $B$
+  \item Therefore, $CD$ is defined and has a $4 \times 2$ dimension, while 
+    $DC$ is not defined
+\end{enumerate}
+\\\\
+Recall that matrices can be thought of as machines
+\begin{itemize}
+  \item Let $B$ be $n \times p$: input $x \in \mathbb{R}^p$, output $c = Bx \in 
+  \mathbb{R}^n$
+\item Let $A$ be $m \times n$: input $y \in \mathbb{R}^n$, output $b = Ay \in 
+  \mathbb{R}^m$
+\end{itemize}
+\\[8pt]
+Compute $(AB)x$ and $A(B(x))$. Are these the same?
+\\[8pt]
+\textbf{Solution}
+\[
+  Bx = \begin{bmatrix}
+    1 & 2 \\
+    0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    x_1 \\
+    x_2
+  \end{bmatrix} = x_1 \begin{bmatrix}
+    1 \\ 0
+  \end{bmatrix} + x_2 \begin{bmatrix}
+    2 \\ 1
+  \end{bmatrix} = \begin{bmatrix}
+    x_1 + 2x_2 \\
+    x_2
+  \end{bmatrix}
+\]
+\[
+  A(Bx) = \begin{bmatrix}
+    2 & 0 \\
+    1 & 1
+  \end{bmatrix} \begin{bmatrix}
+    x_1 + 2x_2 \\
+    x_2
+  \end{bmatrix} = (x_1 + 2x_2) \begin{bmatrix}
+    2 \\ 1
+  \end{bmatrix} + (x_2) \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix} = \begin{bmatrix}
+    2x_1 + 4x_2 \\
+    x_1 + 3x_2
+  \end{bmatrix}
+\]
+\[
+  (AB)x = \begin{bmatrix}
+    Ab_1 & Ab_2
+  \end{bmatrix} \begin{bmatrix}
+    x_1 \\ x_2
+  \end{bmatrix} = x_1Ab_1 + x_2Ab_2 = x_1(1\begin{bmatrix}
+    2 \\ 1
+  \end{bmatrix} + 0\begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix}) + x_2(2 \begin{bmatrix}
+    2 \\ 1
+  \end{bmatrix} + 1 \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix}) 
+\]
+\[
+= x_1 \begin{bmatrix}
+    2 \\ 1
+  \end{bmatrix} + x_2 \begin{bmatrix}
+    4 \\ 3
+  \end{bmatrix} = \begin{bmatrix}
+    2x_1 + 4x_2 \\
+    x_1 + 3x_2
+  \end{bmatrix}
+\]
+\\[8pt]
+Let $A$ be an $m \times n$ matrix and $B$ be an $n \times p$ matrix. Then for every $x \in \mathbb{R}^p$ 
+\[
+  A(Bx) = (AB)x
+\]
+\subsection{Row Column Rule}
+Let $A$ be $m \times n$ and $B$ be $n \times p$ such that 
+\[
+  A = \begin{bmatrix}
+    R_1 \\ \vdots \\ R_m
+  \end{bmatrix}, \text{ and }
+  B = \begin{bmatrix}
+    C_1 & \cdots & C_p
+  \end{bmatrix}
+\]
+Then 
+\[
+  AB = \begin{bmatrix}
+    R_1C_1 & \cdots & R_1C_p \\
+    R_2C_1 & \cdots & R_2C_p \\
+    R_mC_1 & \cdots & R_mC_p
+  \end{bmatrix} \text{ and }
+  (AB)_{ij} = R_iC_j = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots 
+  + a_{in}b_{nj}
+\]
+\subsubsection{Example Problem}
+Let $A = \begin{bmatrix}
+  2 & 3 & 6 \\
+  -1 & 0 & 1
+\end{bmatrix}$ and $B = \begin{bmatrix}
+  2 & -3 \\
+  0 & 1 \\
+  4 & -7
+\end{bmatrix}.$ Compute $AB$, if it is defined
+\[
+  AB = \begin{bmatrix}
+    2 \cdot 2 + 3 \cdot 0 + 6 \cdot 4 & 2 \cdot (-3) + 3 \cdot 1 + 6 \cdot (-7) \\
+    -1 \cdot 2 + 0 \cdot 0 + 1 \cdot 4 & -1 \cdot (-3) + 0 \cdot 1 + 1 \cdot (-7)
+  \end{bmatrix} = \begin{bmatrix}
+    28 & -45 \\
+    2 & -4
+  \end{bmatrix}
+\]
+\subsection{Outer Product Rule}
+Let $A$ be $m \times n$ and $B$ be $n \times p$ such that
+\[
+  A = \begin{bmatrix}
+    C_1 \cdots C_n
+  \end{bmatrix}, \text{ and } B = \begin{bmatrix}
+    R_1 \\
+    \vdots \\
+    R_n
+  \end{bmatrix}
+\]
+Then 
+\[
+  AB = C_1R_1 + \cdots + \cdots + C_nR_n
+\]
+\subsubsection{Example Problem}
+Let $A = \begin{bmatrix}
+  2 & 3 & 6 \\
+  -1 & 0 & 1
+\end{bmatrix}$ and $B = \begin{bmatrix}
+  2 & -3 \\
+  0 & 1 \\
+  4 & -7
+\end{bmatrix}.$ Compute $AB$, if it is defined
+\\[8pt]
+\textbf{Solution}
+\[
+  \begin{bmatrix}
+    2 & 3 & 6 \\
+    -1 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    2 & -3 \\
+    0 & 1 \\
+    4 & -7
+  \end{bmatrix} = \begin{bmatrix}
+    2 \\ -1
+  \end{bmatrix} \begin{bmatrix}
+    2 & -3
+  \end{bmatrix} + \begin{bmatrix}
+    3 \\ 0
+  \end{bmatrix} \begin{bmatrix}
+    0 & 1
+  \end{bmatrix} + \begin{bmatrix}
+    6 \\ 1
+  \end{bmatrix} \begin{bmatrix}
+    4 & -7
+  \end{bmatrix}
+\]
+\[
+  = \begin{bmatrix}
+    4 & -6 \\
+    -2 & 3
+  \end{bmatrix} + \begin{bmatrix}
+    0 & 3 \\
+    0 & 0
+  \end{bmatrix} + \begin{bmatrix}
+    24 & -42 \\
+    4 & -7
+  \end{bmatrix}
+\]
+\[
+  = \begin{bmatrix}
+    28 & -45 \\
+    2 & -4
+  \end{bmatrix}
+\]

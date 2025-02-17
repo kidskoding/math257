@@ -1,0 +1,568 @@
+\section{Properties of Matrix Multiplication}
+The \textbf{identity matrix} $I_n$ of size $n$ is defined as
+\[
+  I_n = \begin{bmatrix}
+    1 & 0 & \dots & 0 \\
+    0 & 1 & \dots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \dots & 1
+  \end{bmatrix}
+\]
+Let $A$ be an $m \times n$ matrix and $B$ and $C$ be matrices for which the 
+indicated sums nad products are defined 
+\begin{enumerate}
+  \item $A(BC) = (AB)C$ (associative law of multiplication)
+  \item $A(B + C) = AB + AC, (B + C)A = BA + CA$ (distributive laws)
+  \item $r(AB) = (rA)B = A(rB)$ for every scalar $r$
+  \item $A(rB + sC) = rAB + sAC$ for every scalars $r$, $s$ (linearity of matrix 
+    multiplication)
+  \item $I_mA = A = AI_n$ (identity for matrix multiplication)
+\end{enumerate}
+\subsection{Matrix Identities vs Real Number Identities}
+While matrix multiplication properties are analogous to that of real numbers,
+not all properties of real numbers hold for matrices 
+\\[8pt]
+For Example, let $A = \begin{bmatrix}
+  1 & 1 \\
+  0 & 1
+\end{bmatrix}$ and $B = \begin{bmatrix}
+  1 & 0 \\
+  1 & 1
+\end{bmatrix}$. Determine $AB$ and $BA$. Are these matrices the same?
+\\[8pt]
+\[
+  AB = \begin{bmatrix}
+    1 & 1 \\
+    0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    1 & 0 \\
+    1 & 1
+  \end{bmatrix} = \begin{bmatrix}
+    2 & 1 \\
+    1 & 1
+  \end{bmatrix}
+\]
+\[
+  BA = \begin{bmatrix}
+    1 & 0 \\
+    1 & 1
+  \end{bmatrix} \begin{bmatrix}
+    1 & 1 \\
+    0 & 1
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 1 \\
+    1 & 2
+  \end{bmatrix}
+\]
+No. $AB \neq BA$. These matrices are not the same. Matrix multiplication is not
+commutative!
+\subsection{Transpose Property of Matrices}
+Have $A = \begin{bmatrix}
+  1 & 2 & 0 \\
+  3 & 0 & 1
+\end{bmatrix}$ and $B = \begin{bmatrix}
+  1 & 2 \\
+  0 & 1 \\
+  -2 & 4
+\end{bmatrix}$. What is $(AB)^T$? What about $A^TB^T$ and $B^TA^T$?
+\[
+  AB = \begin{bmatrix}
+    1 & 2 & 0 \\
+    3 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    1 & 2 \\
+    0 & 1 \\
+    -2 & 4
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 4 \\
+    1 & 10
+  \end{bmatrix}
+\]
+\[
+  (AB)^T = \begin{bmatrix}
+    1 & 1 \\
+    4 & 10
+  \end{bmatrix}
+\]
+\[
+  A^TB^T = \begin{bmatrix}
+    1 & 3 \\
+    2 & 0 \\
+    0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    1 & 0 & -2 \\
+    2 & 1 & 4
+  \end{bmatrix} = \begin{bmatrix}
+    7 & 3 & 10 \\
+    2 & 0 & -4 \\
+    2 & 1 & 4
+  \end{bmatrix}
+\]
+\[
+  B^TA^T = \begin{bmatrix}
+    1 & 0 & -2 \\
+    2 & 1 & 4
+  \end{bmatrix} \begin{bmatrix}
+    1 & 3 \\
+    2 & 0 \\
+    0 & 1
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 1 \\
+    4 & 10
+  \end{bmatrix}
+\]
+\\[8pt]
+The transpose of a product is the product of transposes in \textbf{opposite order}
+\[
+  (AB)^T = B^TA^T
+\]
+\subsection{Powers of Matrices}
+Let $A^k$ = $A \cdots A$ for $k$-times; that is $A^k$ is obtained by multiplying
+$A$ $k-times$ with itself
+\\[8pt]
+For which matrices $A$ does $A^k$ make sense? If $A$ is $m \times n$ what can 
+$m$ and $n$ be?
+\\[8pt]
+To be able to multiply $A$ by any $m \times n$-matrix, we need that $m = n$
+\\[8pt]
+Determine $\begin{bmatrix}
+  1 & 0 \\
+  3 & 2
+\end{bmatrix}^3$
+\\[8pt]
+\[
+\begin{bmatrix}
+  1 & 0 \\
+  3 & 2
+\end{bmatrix} \begin{bmatrix}
+  1 & 0 \\
+  3 & 2
+\end{bmatrix} \begin{bmatrix}
+  1 & 0 \\
+  3 & 2
+\end{bmatrix} = \begin{bmatrix}
+  1 & 0 \\
+  9 & 4
+\end{bmatrix} \begin{bmatrix}
+  1 & 0 \\
+  3 & 2
+\end{bmatrix} = \begin{bmatrix}
+  1 & 0 \\
+  21 & 8
+\end{bmatrix}
+\]
+\\[8pt]
+Higher powers of matrices are more difficult to calculate using this method!
+
+\section{Elementary Matrices}
+Let $A$ be a $3 \times 3$-matrix. What happens to $A$ if you multiply it by 
+one of $E_1$, $E_2$, and $E_3$?
+\\[8pt]
+\[
+  E_1A = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 3 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    3a_{21} & 3a_{22} & 3a_{23} \\
+    a_{31} & a_{32} & a_{33}
+  \end{bmatrix} = \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    3a_{21} & 3a_{22} & 3a_{23} \\
+    a_{31} & a_{32} & a_{33} 
+  \end{bmatrix}
+\]
+\[
+  E_2A = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 0 & 1 \\
+    0 & 1 & 0
+  \end{bmatrix} \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33}
+  \end{bmatrix} = \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{31} & a_{32} & a_{33} \\
+    a_{21} & a_{22} & a_{23}
+  \end{bmatrix}
+\]
+\[
+  E_3A = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    2 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} & a_{32} & a_{33}
+  \end{bmatrix} = \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} \\
+    a_{21} & a_{22} & a_{23} \\
+    a_{31} + 2a_{11} & a_{32} + 2a_{12} & a_{33} + 2a_{13}
+  \end{bmatrix}
+\]
+\\[8pt]
+If an elementary row operation is performed on an $m \times n$-matrix $A$, the 
+resulting matrix can be written as $EA$, where the $m \times m$-matrix $E$ is 
+created by performing the same row operations on $I_m$
+\\[8pt]
+An \textbf{elementary matrix} is one that an elementary row operation can be 
+performed upon the identity matrix
+\\[8pt]
+Let $A$, $B$ be two $m \times n$ matrices and row-equivalent. Then there is a sequence $m \times m$-elementary matrices $E_1, \dots, E_l$ such that 
+\[
+  E_l \dots E_1A = B 
+\]
+\\[8pt]
+Consider $A = \begin{bmatrix}
+  0 & 1 \\
+  1 & 2 \\
+  2 & 4
+\end{bmatrix}$ and $B = \begin{bmatrix}
+  1 & 2 \\
+  0 & 1 \\
+  0 & 0
+\end{bmatrix}$. Find two elementary matrices $E_1, E_2$ such that $E_2E_1A = B$ 
+\[
+  A = \begin{bmatrix}
+    0 & 1 \\
+    1 & 2 \\
+    2 & 4
+  \end{bmatrix} \rightarrow \begin{bmatrix}
+    1 & 2 \\
+    0 & 1 \\
+    2 & 4
+  \end{bmatrix} \rightarrow \begin{bmatrix}
+    1 & 2 \\
+    0 & 1 \\
+    0 & 0
+  \end{bmatrix} = B
+\]
+Set $E_1 = \begin{bmatrix}
+  0 & 1 & 0 \\
+  1 & 0 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}$ and $E_2 = \begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  -2 & 0 & 1
+\end{bmatrix}$
+\[
+  E_2E_1A = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    -2 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    0 & 1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    0 & 1 \\
+    1 & 2 \\
+    2 & 4
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 2 \\
+    0 & 1 \\
+    0 & 0
+  \end{bmatrix} = B
+\]
+\\[8pt]
+Recall that
+\[
+  \begin{bmatrix}
+    1 & 2 \\
+    0 & 1 \\
+    0 & 0
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    -2 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    0 & 1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    0 & 1 \\
+    1 & 2 \\
+    2 & 4
+  \end{bmatrix}
+\]
+Find elementary matrices $E_1^{-1}$ and $E_2^{-1}$ such that $A = E_1^{-1}E_2^{-1} = B$ 
+\\[8pt]
+\[
+  A = \begin{bmatrix}
+    0 & 1 \\
+    1 & 2 \\
+    2 & 4
+  \end{bmatrix} \rightarrow \begin{bmatrix}
+    1 & 2 \\
+    0 & 1 \\
+    2 & 4
+  \end{bmatrix} \rightarrow \begin{bmatrix}
+    1 & 2 \\
+    0 & 1 \\
+    0 & 0
+  \end{bmatrix} = B
+\]
+Set $E_1^{-1} = \begin{bmatrix}
+  0 & 1 & 0 \\
+  1 & 0 & 0 \\
+  0 & 0 & 1
+  \end{bmatrix}$ and $E_2^{-1} = \begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  2 & 0 & 1
+\end{bmatrix}$
+\\[8pt]
+Notice how the row operations were reversed to go from matrix $B$ to $A$
+
+\section{Inverse of a Matrix}
+The inverse of a real number $a$ is denoted as $a^{-1}$. For example, $7^{-1} = 
+\frac{1}{7}$ and 
+\[
+  7 \cdot 7^{-1} = 7^{-1} \cdot 7 = 1
+\]
+Not all real numbers have inverse. $0^-1$ is not well defined, since there is no 
+real number $b$ such that $0 \cdot b$ = 1 
+\\[8pt]
+Recall that the identity matrix $I_n$ is the $n \times n$-matrix 
+\[
+  \begin{bmatrix}
+    1 & 0 & \cdots & 0 \\
+    0 & 1 & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \cdots & 1
+  \end{bmatrix}
+\]
+An $n \times n$ matrix $A$ is said to be \textbf{invertible} if there is an 
+$n \times n$ matrix $C$ satisfying 
+\[
+  CA = AC = I_n
+\]
+where $I_n$ is the $n \times n$ identity matrix. We call $C$ the inverse of $A$ 
+\subsection{Example Problem}
+What is the inverse of $\begin{bmatrix}
+  1 & 0 & 0 \\
+  5 & 1 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}$?
+\\[8pt]
+Elementary matrices are invertible because row operations are reversible. So the 
+inverse matrix is the elementary matrix corresponding to $R_2 \rightarrow R_2 - 
+5R_1$: $\begin{bmatrix}
+  1 & 0 & 0 \\
+  -5 & 1 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}$
+Let $A$ be an invertible matrix, then its inverse $C$ is unique
+\\[8pt]
+Assume $B$ and $C$ are both inverses of $A$. Then 
+\[
+  \begin{aligned}
+    &BA = AB = I_n \\
+    &CA = AC = I_n
+  \end{aligned}
+\]
+Thus, $B = BI_n = BAC = I_nC = C$
+\subsection{Inverse Properties}
+Suppose $A$ and $B$ are invertible. Then 
+\begin{enumerate}
+  \item $A^{-1}$ is invertible and $(A^{-1})^{-1} = A$ (i.e. $A$ is the 
+    inverse of $A^{-1}$)
+  \item $AB$ is invertible and $(AB)^{-1} = B^{-1}A^{-1}$ 
+  \item $A^{T}$ is invertible and $(A^T)^-1$ $(A^{-1})^T$
+\end{enumerate}
+\\[8pt]
+\textbf{Proofs}
+\[
+  \begin{aligned}
+    &AA^{-1} = I = A^{-1}A \\[8pt]
+    &(B^{-1}A^{-1})(AB) = B^{-1}IB = B^{-1}B \\
+    &(AB)(B^{-1}A^{-1}) = AI^{-1} = AA^{-1} = I \\[8pt] 
+    &A^T(A^{-1})^T = (A^-1A)^T = I^T = I
+  \end{aligned}
+\]
+\subsection{Multiplying the inverse of A}
+$A^{-1}$ is denoted as the inverse of $A$. Multiplying by $A^{-1}$ is like 
+"dividing by $A$"
+\begin{itemize}
+  \item Writing $\frac{A}{B}$ is unclear whether this means $AB^{-1}$ or $B^{-1}A$, 
+    and these two matrices are completely different
+\end{itemize}
+\\[8pt]
+If $AB = I$, then $A^{-1} = B$ and so $BA = I$
+\\[8pt]
+Similarly, not all $n \times n$ matrices are invertible. For example, the $2 \times 
+2$ matrix 
+\[
+  \begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+  \end{bmatrix}
+\]
+is not invertible
+\[
+  \begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+  \end{bmatrix} \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix} = \begin{bmatrix}
+    c & d \\
+    0 & 0
+  \end{bmatrix} \neq I_2
+\]
+Recall that the identity $2 \times 2$ matrix $(I_2)$ is 
+\[
+  \begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+  \end{bmatrix}
+\]
+The second row of matrix $\begin{bmatrix}
+  c & d \\
+  0 & 0
+\end{bmatrix}$, $\begin{bmatrix}
+  0 & 0
+\end{bmatrix} \neq \begin{bmatrix}
+  0 & 1
+\end{bmatrix}$, the second row of the identity matrix. Therefore, $\begin{bmatrix}
+  0 & 1 \\
+  0 & 0
+\end{bmatrix}$ can't be invertible
+\\[8pt]
+Suppose that $A$ is an invertible $n \times n$ matrix. Then for each $b$ in 
+$\mathbb{R}^n$, the equation $Ax = b$ has the unique solution $x = A^{-1}b$ 
+\\[8pt]
+\textbf{Proof}
+\\[8pt]
+The vector $A^{-1}b$ is a solution, because 
+\[
+  A(A^{-1}b) = (AA^{-1})b = I_nb = b
+\]
+Suppose there is another solution $w$, then $Aw = b$. Thus 
+\[
+  w = I_nw = A^{-1}Aw = A^{-1}b
+\]
+Additionally, $A$ must have $n$ pivots because otherwise $Ax = b$ would not have a 
+solution of each $b$
+
+\section{Computing the Inverse}
+A $1 \times 1$ matrix $\begin{bmatrix}
+  a
+\end{bmatrix}$ is invertible when $a \neq 0$ and its inverse is 
+$\begin{bmatrix}
+  \frac{1}{a}
+\end{bmatrix}$
+\\[8pt]
+Suppose $A = \begin{bmatrix}
+  a & b \\
+  c & d
+\end{bmatrix}$. If $ad - bc \neq 0$, then $A$ is invertible and 
+\[
+  A^{-1} = \frac{1}{ad - bc} \begin{bmatrix}
+    d & -b \\
+    -c & a
+  \end{bmatrix}
+\]
+If $ad - bc = 0$, then $A$ is not invertible 
+\\[8pt]
+\textbf{Proof}
+\\[8pt]
+\[
+  \frac{1}{ad - bc} \begin{bmatrix}
+    d & -b \\
+    -c & a
+  \end{bmatrix} \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix} = \frac{1}{ad - bc} \begin{bmatrix}
+    da - bc & db - bd \\
+    -ca + ac & -cb + ad
+  \end{bmatrix} 
+\]
+\[
+  = \begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+  \end{bmatrix}
+\]
+Let $A$ be an $n \times n$. The following are equivalent:
+\begin{itemize}
+  \item $A$ is invertible
+  \item the RREF of $A$ is $I_n$
+\end{itemize}
+\\[8pt]
+\textbf{Proof}
+\\[8pt]
+Suppose $A$ can be row-reduced to the identity matrix 
+\[
+  A = A_0 \rightsquigarrow A_1 \rightsquigarrow \cdots \rightsquigarrow
+  A_m = I_n
+\]
+Thus there are elementary matrices $E_1, \cdots, E_m$ such that 
+\[
+  E_mE_{m-1} \cdots E_1A = I_n
+\]
+Thus 
+\[
+  A^{-1} = E_mE_{m - 1}\cdots E_1 = E_mE_{m - 1} \cdots E_1I_n
+\]
+This boils down to the ideaw where we suppose $A$ is invertible. Every sequence of 
+elementary row operations that reduces $A$ to $I_n$ will also transform $I_n$ to 
+$A^{-1}$
+\subsection{Algorithm}
+Place $A$ and $I$ side by side to form an augmented matrix of $\begin{bmatrix}
+  A \mid I
+\end{bmatrix}$ 
+\\[8pt]
+This becomes a $n \times 2n$ matrix (Big Augmented Matrix), instead of $n \times 
+(n + 1)$ 
+\\[8pt]
+Perform row operations on this matrix (which will produce identical operations on A 
+and I). 
+\\[8pt]
+By Theorem: $\begin{bmatrix}
+    A \mid I
+  \end{bmatrix}$ will row reduce to $\begin{bmatrix}
+  I \mid A^{-1}
+  \end{bmatrix}$ 
+\subsubsection{Example}
+Find the inverse of $A = \begin{bmatrix}
+  2 & 0 & 0 \\
+  -3 & 0 & 1 \\
+  0 & 1 & 0
+\end{bmatrix}$, if it exists
+\\[8pt]
+\[
+  \begin{bmatrix}
+    A \mid I
+  \end{bmatrix} = \left[ \begin{array}{ccc|ccc}
+  2 & 0 & 0 & 1 & 0 & 0 \\
+    -3 & 0 & 1 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 0 & 0 & 1
+  \end{array} \right]
+  \rightsquigarrow \left[  
+    \begin{array}{ccc|ccc}
+      1 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
+      -3 & 0 & 1 & 0 & 1 & 0 \\
+      0 & 1 & 0 & 0 & 0 & 1
+    \end{array}
+  \right] \rightsquigarrow \left[ \begin{array}{ccc|ccc}
+    1 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
+    0 & 1 & 0 & \frac{3}{2} & 1 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 1
+  \end{array} \right]
+\]
+\[
+  \rightsquigarrow \left[ 
+    \begin{array}{ccc|ccc}
+      1 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
+      0 & 1 & 0 & 0 & 0 & 1 \\
+      0 & 0 & 1 & \frac{3}{2} & 1 & 0
+    \end{array}
+  \right]
+\]

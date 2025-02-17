@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.2.11)  12 FEB 2025 14:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2025.2.11)  17 FEB 2025 06:29
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -21,6 +21,14 @@ File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip48
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
+) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks16
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2022/04/08 v2.17n AMS math features
 \@mathmargin=\skip50
@@ -30,7 +38,7 @@ For additional information on amsmath, use the `?' option.
 Package: amstext 2021/08/26 v2.01 AMS text
  (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks16
+\@emptytoks=\toks17
 \ex@=\dimen141
 )) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
@@ -68,21 +76,21 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \dotsspace@=\muskip16
 \c@parentequation=\count266
 \dspbrk@lvl=\count267
-\tag@help=\toks17
+\tag@help=\toks18
 \row@=\count268
 \column@=\count269
 \maxfields@=\count270
-\andhelp@=\toks18
+\andhelp@=\toks19
 \eqnshift@=\dimen144
 \alignsep@=\dimen145
 \tagshift@=\dimen146
 \tagwidth@=\dimen147
 \totwidth@=\dimen148
 \lineht@=\dimen149
-\@envbody=\toks19
+\@envbody=\toks20
 \multlinegap=\skip51
 \multlinetaggap=\skip52
-\mathdisplay@stack=\toks20
+\mathdisplay@stack=\toks21
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
@@ -92,21 +100,28 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 ) (build/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
- (./week-0.tex
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
+LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 10.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (./week-0.tex
 Underfull \hbox (badness 10000) in paragraph at lines 2--5
 
  []
@@ -121,58 +136,48 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--8
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--26
-
- []
-
 [1
 
 
 
 pdfTeX warning: pdflatex (file pdftex.map): cannot open font map file
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 32--35
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 59--61
+Underfull \hbox (badness 10000) in paragraph at lines 63--65
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 78--81
+Underfull \hbox (badness 10000) in paragraph at lines 82--85
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--96
+Underfull \hbox (badness 10000) in paragraph at lines 97--101
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--96
+Underfull \hbox (badness 10000) in paragraph at lines 97--101
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 113--115
+Underfull \hbox (badness 10000) in paragraph at lines 118--120
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 146--150
+Underfull \hbox (badness 10000) in paragraph at lines 151--155
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 146--150
+Underfull \hbox (badness 10000) in paragraph at lines 151--155
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 210--212
+Underfull \hbox (badness 10000) in paragraph at lines 215--217
 
  []
 
@@ -184,7 +189,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.225     \end{align}
+l.230     \end{align}
                      
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -197,7 +202,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.241     \end{align}
+l.246     \end{align}
                      
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -210,33 +215,38 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.255     \end{align}
+l.260     \end{align}
                      
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--274
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 288--293
+Underfull \hbox (badness 10000) in paragraph at lines 293--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 293--299
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 344--346
+Underfull \hbox (badness 10000) in paragraph at lines 348--350
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 347--355
+Underfull \hbox (badness 10000) in paragraph at lines 351--359
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 356--361
+Underfull \hbox (badness 10000) in paragraph at lines 360--365
 
  []
 
@@ -247,7 +257,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.383 \end{enumerate} \\\\
+l.387 \end{enumerate} \\\\
                           
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -260,26 +270,309 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.384 \subsection
+l.388 \subsection
                  {Pivot Position}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-[7]) [8] (build/main.aux) ) 
+[7]) (./week-2.tex [8]
+Underfull \hbox (badness 10000) in paragraph at lines 58--62
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--92
+
+ []
+
+[9]
+Overfull \hbox (54.78745pt too wide) in paragraph at lines 94--105
+\OT1/cmr/m/n/10 Consider the $\OML/cmm/m/it/10 m \OMS/cmsy/m/n/10 ^^B \OML/cmm/m/it/10 n$ \OT1/cmr/m/n/10 ma-tri-ces $\OML/cmm/m/it/10 A \OT1/cmr/m/n/10 = []$, and $\OML/cmm/m/it/10 B \OT1/cmr/m/n/10 = []$ 
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 178--181
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--189
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--189
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--189
+
+ []
+
+
+Overfull \hbox (8.87105pt too wide) in paragraph at lines 204--207
+\OT1/cmr/m/n/10 The \OT1/cmr/bx/n/10 span $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 A[]; [] ; A[]\OT1/cmr/m/n/10 )$ is de-fined as the set of all lin-ear com-bi-na-tions of $\OML/cmm/m/it/10 A[]; [] ; A[]$\OT1/cmr/m/n/10 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--221
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--221
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 210--221
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--265
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--279
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--282
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 290--295
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 318--329
+
+ []
+
+[13]
+Overfull \hbox (0.42386pt too wide) in paragraph at lines 425--426
+[]$\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; x[]; [] ; x[]\OT1/cmr/m/n/10 )$ is a so-lu-tion of the vec-tor equa-tion, $\OML/cmm/m/it/10 x[]a[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 x[]a[] \OT1/cmr/m/n/10 + [] \OML/cmm/m/it/10 x[]a[] \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (5.49226pt too wide) in paragraph at lines 431--435
+[]$\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; x[]; [] ; x[]\OT1/cmr/m/n/10 )$ is a so-lu-tion of the sys-tem with aug-mented ma-trix, $[]$ 
+ []
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.436 \\[8pt]
+             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[14]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.469 \\[8pt]
+             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[15]
+! Misplaced alignment tab character &.
+l.533   &
+         Ab_1 = \begin{bmatrix}
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.590 \\\\
+          
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.591 R
+       ecall that matrices can be thought of as machines
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.598 \\[8pt]
+             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[16]
+Overfull \hbox (6.30922pt too wide) detected at line 648
+\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 AB\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 x \OT1/cmr/m/n/10 = [] [] = \OML/cmm/m/it/10 x[]Ab[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 x[]Ab[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 (1 [] + 0 []) + \OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 (2 [] + 1 [])
+ []
+
+
+Overfull \hbox (0.36127pt too wide) detected at line 683
+\OML/cmm/m/it/10 AB \OT1/cmr/m/n/10 = [] [](\OML/cmm/m/it/10 AB\OT1/cmr/m/n/10 )[] = \OML/cmm/m/it/10 R[]C[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 a[]b[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 a[]b[] \OT1/cmr/m/n/10 + [] + \OML/cmm/m/it/10 a[]b[]
+ []
+
+[17]) (./week-3.tex
+Underfull \hbox (badness 10000) in paragraph at lines 22--33
+
+ []
+
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 120--133
+
+ []
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 158--161
+
+ []
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 291--294
+
+ []
+
+[21]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.377 \\[8pt]
+             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.394 \\[8pt]
+             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 470--475
+
+ []
+
+[23]
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.498 \\[8pt]
+             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 534--540
+
+ []
+
+
+Overfull \hbox (57.11945pt too wide) detected at line 559
+[] \OT1/cmr/m/n/10 = [] \U/msa/m/n/10   []   []
+ []
+
+) [24] (build/main.aux) ) 
 Here is how much of TeX's memory you used:
- 1192 strings out of 477985
- 18221 string characters out of 5839380
- 1868388 words of memory out of 6000000
- 21436 multiletter control sequences out of 15000+600000
- 518005 words of font info for 52 fonts, out of 8000000 for 9000
+ 1318 strings out of 477985
+ 20136 string characters out of 5839380
+ 1878388 words of memory out of 6000000
+ 21540 multiletter control sequences out of 15000+600000
+ 520485 words of font info for 64 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,13n,62p,280b,251s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/anirudh/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmex10.pk> </home/anirudh/.texlive2023/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.600pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmbx10.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk> </home/anirudh/.texlive2023/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.720pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr12.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr17.pk>
-Output written on build/main.pdf (8 pages, 94097 bytes).
+ 56i,13n,62p,292b,251s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/anirudh/.texlive2023/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msam10.600pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy7.pk> </home/anirudh/.texlive2023/texmf-var/fonts/pk/ljfour/public/amsfonts/symbols/msbm10.600pk> </home/anirudh/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmex10.pk> </home/anirudh/.texlive2023/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.600pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi7.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmsy10.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr7.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmmi10.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmbx10.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr10.pk> </home/anirudh/.texlive2023/texmf-var/fonts/pk/ljfour/public/cm/cmbx12.720pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr12.pk> </usr/share/texlive/texmf-dist/fonts/pk/ljfour/public/cm/dpi600/cmr17.pk>
+Output written on build/main.pdf (24 pages, 151586 bytes).
 PDF statistics:
- 345 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
+ 480 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

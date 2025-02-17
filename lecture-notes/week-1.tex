@@ -20,8 +20,10 @@ However,
 \[
   x_2 = 2\sqrt{x_1} - 7
 \]
-is \textbf{not} a linear equation because it cannot be expressed in the form of $a_{1}x_{1} + \dots + a_{n}x_{n} = b$ \\
-\textbf{Linear Systems} are collections of one or more linear equations involving the same set of variables, say, $x_1, x_2, \dots, x_n$. \\\\
+is \textbf{not} a linear equation because it cannot be expressed in the form of $a_{1}x_{1} + \dots + a_{n}x_{n} = b$
+\\[8pt]
+\textbf{Linear Systems} are collections of one or more linear equations involving the same set of variables, say, $x_1, x_2, \dots, x_n$.
+\\[8pt]
 A \textbf{solution} of a linear system is a list $(s_1,s_2,\dots,s_n)$ of numbers that makes each equation in the system true when the values $s_1, s_2, \dots, s_n$ are substituted for $x_1, x_2, \dots, x_n$, respectively.
 \subsection{Example Problem - Two equations in two variables}
 \[
@@ -30,21 +32,23 @@ A \textbf{solution} of a linear system is a list $(s_1,s_2,\dots,s_n)$ of number
     -x_1 + x_2 &= 0
   \end{aligned}
 \]
-What is a solution for this system of linear equations? \\\\
+\\[8pt]
+What is a solution for this system of linear equations?
+\\[8pt]
 \textbf{Solution} - Use the \textbf{elimination method}
 \begin{enumerate}
   \item Add the two systems to eliminate the $x_1$ variable
   \[
     \begin{aligned}
-      &2x_2 = 1 \\
-      &x_2 = \frac{1}{2}
+      2x_2 &= 1 \\
+      x_2 &= \frac{1}{2}
     \end{aligned}
   \]
   \item Plug into the first equation to find the $x_2$ variable
   \[
     \begin{aligned}
-      &x_1 + \frac{1}{2} = 1 \\
-      &x_1 = \frac{1}{2}
+      x_1 + \frac{1}{2} &= 1 \\
+      x_1 &= \frac{1}{2}
     \end{aligned}
   \]
   \item Thus $(x_1, x_2) = (\frac{1}{2},\frac{1}{2})$ is the only solution. 
@@ -89,9 +93,10 @@ How many solutions are there to this system of equations? \\\\
     \]
   \item This means both equations have the same solutions. Therefore, the system is said to have \textbf{infinitely many solutions}.
 \end{enumerate}
-\subsection{Theorem 1}
-A linear system has either \textbf{one unique solution}, \textbf{no solution}, or \textbf{infinitely many solutions}. \\\\
-\textbf{Definition} - the \textbf{solution set} of a linear system is the set of all solutions of the linear system. Two linear systems are \textbf{equivalent} if they have the same solution set. \\\\
+\subsection{Three Types of Linear Systems}
+A linear system comes in three forms. It has either \textbf{one unique solution}, 
+\textbf{no solution}, or \textbf{infinitely many solutions}. \\\\
+The \textbf{solution set} of a linear system is the set of all solutions of the linear system. Two linear systems are \textbf{equivalent} if they have the same solution set. \\\\
 The general strategy is to replace one system with an equivalent system that is easier to solve.
 \subsubsection{Example Problem}
 Transform this linear system into another easier equivalent system
@@ -202,9 +207,9 @@ and the augmented matrix would be
 \subsection{Elementary Row Operation}
 An \textbf{elementary row operation} is one of the following
 \begin{itemize}
-  \item Replacement - add a multiple of one row to another row: $R_i \rightarrow R_i + cR_j$, where $i \neq j$.
-  \item Interchange - Interchange two rows: $R_i \leftrightarrow R_j$
-  \item Scaling - Multiply all entries in a row by a nonzero constant: $R_i \rightarrow cR_i$, where $c \neq 0$
+  \item \textbf{Replacement} - add a multiple of one row to another row: $R_i \rightarrow R_i + cR_j$, where $i \neq j$.
+  \item \textbf{Interchange} - Interchange two rows: $R_i \leftrightarrow R_j$
+  \item \textbf{Scaling} - Multiply all entries in a row by a nonzero constant: $R_i \rightarrow cR_i$, where $c \neq 0$
 \end{itemize}
 \subsubsection{Example Problem}
 Give several examples of elementary row operations \\\\
@@ -289,8 +294,7 @@ Elementary row operations can undo or \textbf{reverse} each other. For example, 
 Every row operation is reversible. Above showed an example of reversing the replacement operator. 
 Similarly, the scaling operator $R_2 \rightarrow cR_2$ is reversed by the scaling operator $R_2 \rightarrow \frac{1}{c}R_2$. 
 Row interchange $R_1 \leftrightarrow R_2$ is reversible by performing it twice. \\\\
-Two matrices are \textbf{row equivalent} if one matrix can be transformed into the other matrix by a sequence of elementary row operations.
-\subsection{Theorem 1}
+Two matrices are \textbf{row equivalent} if one matrix can be transformed into the other matrix by a sequence of elementary row operations. \\\\
 If the augmented matrices of two linear systems are row equivalent, then the two systems have the same solution set.
 \section{Echelon forms of matrices}
 \textbf{Definition} - A matrix is in echelon form or \textbf{row echelon form} when
