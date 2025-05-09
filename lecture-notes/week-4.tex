@@ -1,0 +1,2036 @@
+\section{LU Decomposition}
+An $n \times n$ matrix $A$ is
+\begin{itemize}
+  \item \textbf{upper triangular} when in the form of
+    \[
+      \begin{bmatrix}
+        0 & * & * & * & * \\
+        0 & 0 & * & * & * \\
+        0 & 0 & 0 & \ddots & \vdots \\
+        0 & 0 & 0 & 0 & * \\
+      \end{bmatrix}
+    \]  
+  \item \textbf{lower triangular} when in the form of
+    \[
+      \begin{bmatrix}
+        * & 0 & 0 & 0 & 0 \\
+        * & * & 0 & 0 & 0 \\
+        * & * & * & 0 & 0 \\
+        * & * & * & \ddots & \vdots \\
+        * & * & * & * & *
+      \end{bmatrix}
+    \]
+\end{itemize}
+$L$ is typically referred to as the lower triangular matrix, while $U$ is the upper triangular
+matrix. \\\\
+The product of the two matrices $L$ and $U$ make up the original matrix $A$, where $A = LU$ 
+\subsection{Calculating $L$ and $U$}
+Given matrix,
+\[
+  A = \begin{bmatrix}
+    2 & 4 \\
+    6 & 8
+  \end{bmatrix}
+\]
+calculate its LU Decomposition \\\\
+\textbf{Solution}
+\begin{itemize}
+  \item Form the $U$ matrix first, which must have zeroes in the lower corner of the matrix
+  \[
+    \begin{bmatrix}  
+      2 & 4 \\
+      6 & 8
+    \end{bmatrix} \rightarrow
+    \begin{bmatrix}
+      2 & 4 \\
+      0 & -4
+    \end{bmatrix}
+  \] where
+  \[
+    U = \begin{bmatrix}
+      2 & 4 \\
+      0 & \frac{4}{3}
+    \end{bmatrix}
+  \]
+\item $L$ forms based off the inverse coefficients that were used to create $U$ 
+  \begin{itemize}
+    \item Since $U$ was formed by multiplying $\frac{1}{3}$, that is the value that 
+      gets filled in
+  \end{itemize}
+  \[
+    L = \begin{bmatrix}
+      1 & 0 \\
+      \frac{1}{3} & 1
+    \end{bmatrix}
+  \]
+\end{itemize} \\\\
+\[
+  L = \begin{bmatrix}
+    1 & 0 \\
+    \frac{1}{3} & 1
+  \end{bmatrix} \quad U = \begin{bmatrix}
+    2 & 4 \\
+    0 & \frac{4}{3}
+  \end{bmatrix}
+\]
+\section{Solving systems using LU Decomposition}
+Systems can be solved using the decomposed matrices $L$ and $U$, where $Lc = b$ and $Ux = c$, 
+where $c$ and $x$ are some form of vector
+\subsubsection{Example}
+Given the following matrices
+\[
+  L = \begin{bmatrix}
+    1 & 0 \\
+    \frac{1}{3} & 1
+  \end{bmatrix} \quad 
+  U = \begin{bmatrix}
+    2 & 4 \\
+    0 & \frac{4}{3}
+  \end{bmatrix}
+\] find a solution to the system such that
+\section{Inner Product and Orthogonality}
+The \textbf{inner product} of $v$, $w$ $\in \mathbb{R}^n$ is 
+\[  
+  v \cdot w = v^Tw
+\]
+\begin{itemize}
+  \item If $v = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}$
+and $w = \begin{bmatrix} w_1 \\ \vdots \\ w_n \end{bmatrix}$,
+then $v \cdot w = v_1w_1 + v_2w_2 + \cdots + v_nw_n$
+\item $(v \cdot w)^T = v \cdot w$ because matrices are $1$ x $1$. Therefore
+\[
+  v^Tw = (v^Tw)^T = w^T(v^T)^T = w^Tv \\
+\]
+\[
+  v^Tw = w^Tv
+\]
+\item $v \cdot v = 0$ if and only if $v = 0$
+\item Let $u, v$, and $w$ be vectors in $\mathbb{R}^n$ and let $c$ be any scalar
+  \begin{itemize}
+    \item $u \cdot v = v \cdot u$ 
+    \item $(u + v) \cdot w = u \cdot w + v \cdot w 
+    \item $(cu) \cdot v = c(u \cdot v) = u \cdot (cv)$
+    \item $u \cdot u \geq 0$, and $u \cdot u = 0$ if and only if $u = 0$
+  \end{itemize}
+\end{itemize}
+\subsection{Important Terms}
+Let $v, w \in \mathbb{R}^n$
+\begin{itemize}
+  \item \textbf{norm} (length) of $v$ $= ||v|| = \sqrt{v \cdot v} = \sqrt{v_1^2 + \cdots + v_n^2}$
+  \item \textbf{distance} between $v$ and $w$ = $||v - w||$
+  \item \textbf{unit vectors} in $\mathbb{R}^n$ are vectors of length $1$
+  \[
+    v = \begin{bmatrix} 1 \\ 2 \end{bmatrix} \rightarrow v \cdot v = 5 \text{  and  } ||v|| = \sqrt{5}
+  \]
+  The example above, given that $v = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$, is not a unit vector since its 
+  norm or length does not equal 1
+  \item \textbf{normalization} includes the process of converting any vector in $\mathbb{R}^n$ to a unit vector. Suppose that 
+  \[
+    u = \frac{v}{||v||} = \frac{v}{\sqrt{5}} = 1
+  \]
+$u$ is the resulting unit vector, which occurred by normalizing $v$.
+\end{itemize}
+\subsubsection{Example}
+Compute $||\begin{bmatrix} 2 \\ -1 \\ 1 \end{bmatrix}||$ and 
+dist($\begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}$, $\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}$)
+\[
+  ||\begin{bmatrix} 2 \\ -1 \\ 1 \end{bmatrix}|| 
+  = \sqrt{\begin{bmatrix} 2 \\ -1 \\ 1 \end{bmatrix} \cdot \begin{bmatrix} 2 \\ -1 \\ 1 \end{bmatrix}}
+  = \sqrt{2^2 + (-1)^2 + 1^2} = \sqrt{6}
+\]
+and dist($\begin{bmatrix} 2 \\ 0 \\ 1 \end{bmatrix}$, $\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}$) = $||\begin{bmatrix} 2 \\ -1 \\ 1 \end{bmatrix}|| = \sqrt{6}$
+\subsection{Orthogonality}
+\begin{itemize}
+  \item Let $v, w \in \mathbb{R}^n$; $v$ and $w$ are \textbf{orthogonal} if $v \cdot w = 0$
+  \item If $v$ and $w$ are both $\in \mathbb{R}^n$ and non-zero, then they are orthogonal only if they are perpendicular (form a right angle)
+  \item A set of vectors in $\mathbb{R}^n$ is \textbf{pairwise orthogonal} if each pairing of them is orthogonal. Such set is called an \textbf{orthogonal set}.
+\end{itemize}
+\subsubsection{Example}
+Find a non-zero $v \in \mathbb{R}^3$ such that $\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix}
+1 \\ -1 \\ 0 \end{bmatrix}$ and $v$ form an orthogonal set \\\\
+Orthogonal sets occur when multiplying $v$ and and any vector in the set of vectors equal to $0$. Therefore,
+\[
+  \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \cdot v = \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} \cdot v = 0
+\]
+Assume that vector $v$ contains elements $\begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix}$. Therefore,
+\[
+  v_1 + v_2 = 0 \text{  and  } v_1 - v_2 = 0
+\]
+Solving the system leads to $v_1 = 0$ and $v_2 = 0$. Therefore, a possible vector for vector $v$ could be 
+\[
+  v = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+\]
+\subsubsection{Orthonormal Sets}
+An \textbf{orthonormal set} occurs when the set is an orthogonal set and all vectors in the set are unit vectors
+\subsubsection{Example}
+Let $v_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, v_2 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$. Since the 
+vectors are not orthonormal (norm $\neq 1$), we need to normalize in order to get an orthonormal set 
+\[
+  u_1 = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 1 \end{bmatrix}, 
+  u_2 = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ -1 \end{bmatrix}
+\]
+\section{Subspaces}
+A non-empty subset $H$ of $\mathbb{R}^n$ is a subspace of $\mathbb{R}^n$ if 
+\begin{itemize}
+  \item $u, v \in H$, then the sum $u + v \in H$
+  \item $u \in H$ and $c$ is scalar, then $cu \in H$
+\end{itemize}
+Therefore, if $v_1, v_2, \cdots, v_m \in \mathbb{R}^n$, then Span($v_1, v_2, \cdots, v_m$) is 
+a subspace of $\mathbb{R}^n$ \\\\
+Let $u = c_1v_1 + \cdots + c_mv_m$, and $w = d_1v_1 + \cdots + d_mv_m$. Valid subspaces 
+include
+\[
+  u + w = c_1v_1 + \cdots + c_mv_m + d_1v_1 + \cdots + d_mv_m 
+  = (c_1 + d_1)v_1 + \cdots + (c_m + d_m)v_m \\
+\]
+\[
+  cu = c(c_1v_1 + \cdots + c_mv_m) = cc_1v_1 + \cdots + cc_mv_m
+\]
+\subsection{Examples}
+Is $H = \left\{\begin{bmatrix} x \\ x \end{bmatrix} : x \in \mathbb{R}}\right\}$ 
+a subspace of $\mathbb{R}^2$? \\\\
+\begin{enumerate}
+  \item Let $\begin{bmatrix} a \\ a \end{bmatrix}, \begin{bmatrix} b \\ b \end{bmatrix}$ be in $H$. 
+  \[
+    \begin{bmatrix} a \\ a \end{bmatrix} + \begin{bmatrix} b \\ b \end{bmatrix} = 
+    \begin{bmatrix} a + b \\ a + b \end{bmatrix} \in H
+  \]
+  \item Similarly,
+  \[
+    c\begin{bmatrix} a \\ a \end{bmatrix} = \begin{bmatrix} ca \\ ca \end{bmatrix} \in H
+  \]
+  \item Yes, $H$ is a subspace of $\mathbb{R}^2$
+\end{enumerate}
+2. Let $Z = \left\{ \begin{bmatrix} 0 \\ 0 \end{bmatrix} \right\}$. Is $Z$ a subspace of 
+$\mathbb{R}^2$? \\\\
+Yes! \\
+\[
+  \begin{bmatrix} 0 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 + 0 \\ 
+  0 + 0 \end{bmatrix} \in Z; \text{ and }c\begin{bmatrix} 0 \\ 0 \end{bmatrix} = \begin{bmatrix} c0 \\ c0 \end{bmatrix}
+  = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \in Z
+\]
+\section{Column Spaces and Nullspaces}
+\textbf{Column Space} - the set of all linear combinations of the columns of $m \times n$ matrix $A$,
+typically written as Col(A). \\\\
+If $A = [a_1, a_2, \cdots, a_n]$, then Col($A$) = span(a_1, a_2, \cdots, a_n)
+\subsection{Example}
+Describe the columns space of $A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$ \\\\
+Col($A$) = span($\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 0 \end{bmatrix}$) = 
+span($\begin{bmatrix} 1 \\ 0 \end{bmatrix}$) $\rightarrow$ the $x$-axis of in $\mathbb{R}^2$
+\subsection{Column Space - TTK (Things to Know)}
+Col($A$) is a subspace of $\mathbb{R}^m$ for $m \times n$ matrix $A$. This is true because Col($A$) is a span, where spans are indeed subspaces. In fact, the column space is a subspace of $\mathbb{R}^m$ because the columns of $A$ are in $\mathbb{R}^m$. \\\\
+Let $A$ be an $m \times n$ matrix and $b \in \mathbb{R}^m$. Then $b$ is in Col($A$) if and only if the linear system $Ax = b$ has a solution. \\\\
+\subsection{Example}
+Let $A = $[a_1, \cdots, a_n]$. Suppose $Ax = b$, where $x = \begin{bmatrix} x_1 \\ \vdots 
+\\ x_n \end{bmatrix}$. 
+\[
+  b = Ax = x_1a_1 + x_2a_2 + \cdots + x_na_n
+\]
+Therefore, $b$ is a linear combination of the columns of $A \leftrightarrow Ax = b$ is consistent. \\\\
+If $A$ and $B$ are two row-equivalent matrices, is Col($A$) = Col($B$)? \\\\
+No! Take $A = \begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix}$ and $B = \begin{bmatrix} 1 & 0 \\ 0 & 0 
+\end{bmatrix}$. Then, Col($A$) = span($\begin{bmatrix} 1 \\ 1 \end{bmatrix}$) $\neq$ span($\begin{bmatrix}1 \\ 0\end{bmatrix}$) = Col($B$)
+\subsection{Nullspace}
+\textbf{Nullspace} - the set of all solutions to $Ax = 0$ for $m \times n$ matrix $A$, notated as Nul($A$), where Nul($A$) = $\left\{v \in \mathbb{R}^n : Av = 0\right\}$ \\\\
+The nullspace of an $m \times n$ matrix $A$ is a subspace of $\mathbb{R}^n$. We can prove this because Nul($A$) is non-empty since $0 \in$ Nul($A$). Suppose $Au = 0$ and $Av = 0$. Then,
+\[
+  A(u + v) = Au + Av = 0 + 0 = 0
+\]
+\[
+  A(cu) = c(Au) = c(0) = 0
+\]
+Therefore, Nul($A$) is closed under addition and scalar multiplication. 
+\subsection{Nullspace Examples}
+1. Let $H = \left\{\begin{bmatrix} v_1 \\ v_2 \\ v_3 \end{bmatrix} : v_1 + v_2 - v_3 = 0 \right\}$. Find 
+a matrix $A$ such that $H =$ Nul($A$)
+\\\\ $v_1 + v_2 - v_3 = 0$ if and only if $\begin{bmatrix} 1 & 1 & -1 \end{bmatrix}
+\begin{bmatrix}v_1 \\ v_2 \\ v_3 \end{bmatrix} = 0$. Thus, 
+Nul($\begin{bmatrix} 1 & 1 & -1 \end{bmatrix} = H$). \\\\
+2. Let $A = \begin{bmatrix} 1 & 1 & -1 \end{bmatrix}$. Find two vectors ($v$ and $w$), such that Nul($A$) = span($v$, $w$). 
+\begin{enumerate}
+  \item Let $u \in $Nul($A$). Then
+    \[
+      A\begin{bmatrix} u_1 \\ u_2 \\ u_3 \end{bmatrix} = 0 \leftrightarrow u_1 + u_2 - u_3 = 0
+    \]
+    \[
+      u_1 = -u_2 + u_3
+    \]
+  \item Therefore,
+    \[
+      \begin{bmatrix} u_1 \\ u_2 \\ u_3 \end{bmatrix} = \begin{bmatrix} -u_2 + u_3 \\ u_2 \\ u_3 \end{bmatrix} = u_2 \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix} + u_3 \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+    \]
+  \item As a result, Nul($A$) = span($\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}$, $\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}$), where $v = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}$ and $w = \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}$
+\end{enumerate}
+3. Is there a matrix $B$, such that Nul($A$) = Col($B$)?
+Yes! Recall that $A = \begin{bmatrix} 1 & 1 & -1 \end{bmatrix}$
+\begin{enumerate}
+  \item Nul($A$) = span($\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}$, 
+    $\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}$)
+  \item $B$'s column space equals the nullspace when matrix $B$ represents all vectors that consist of the 
+    nullspace of $A$. Therefore, $B = \begin{bmatrix} -1 & 1 \\ 1 & 0 \\ 0 & 1 \end{bmatrix}$
+\end{enumerate} \\\\
+Let $A$ be an $m \times n$ matrix, where $b, w \in \mathbb{R}^m$, such that $Aw = b$. Then, 
+$\left\{v \in \mathbb{R}^n : Av = b \right\} = w +$ Nul($A$). \\\\
+For Example, if $A = \begin{bmatrix} 1 & 1 & -1 \end{bmatrix}$ and $b = 1$, where $A\begin{bmatrix} 1 & 0 & 0 \end{bmatrix}^T = b$, show how $\left\{v \in \mathbb{R}^n : Av = b \right\} = w +$ Nul($A$)
+\[
+  Av = b, \text{ where } v^T = \begin{bmatrix} 1 & 0 & 0 \end{bmatrix}, v = 
+  \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
+\] where Nul($A$) = span($\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}. \begin{bmatrix} 1 \\ 0 \\ 1 
+\end{bmatrix}$). Therefore, 
+\[
+  \left\{v \in \mathbb{R}^n : Av = b \right\} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + 
+  \text{span}(\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix})
+\]
+\section{Vector Spaces}
+\begin{itemize}
+  \item Column Vectors in $\mathbb{R}^n$ allow you to take linear combinations of them 
+  \item There are many mathematical objects $X, Y, \dots$ for which a linear combination 
+    $cX + dY$ makes sense ,and have the usual properties of linear combinations in $\mathbb{R}^n$
+\end{itemize}
+\textbf{Vector Spaces} - a collection of vectors, $V$, for which linear combinations make sense \\\\
+Precisely, on $V$, there are two operations: addition and multiplication by scalars (real numbers). 
+\subsection{Closure}
+\textbf{Closures} refer to the property that the result of adding two vectors or multiplying a vector by 
+a scalar is also within the same vector space. \\\\
+Consider that $u, v, w \in V$ and for all scalars $c, d \in \mathbb{R}$
+\begin{itemize}
+  \item $u + v$ is in $V$ (closed under addition), where $u + v = v + u$ (commutative property) 
+    and $(u + v) + w = u + (v + w)$ (associative property)
+  \item There exists a zero vector $0_v$ in $V$ such that $u + 0v = u$ 
+  \item For each $u$ in $V$, there exists a vector $-u$ in $V$ satisfying $u + (-u) = 0v$ 
+  \item $cu \in V$ (closed under scalar multiplication) 
+  \item $c(u + v) = cu + cv$ (distributive property) and 
+    $(c + d)u = cu + du$ (distributive property)
+  \item $(cd)u = c(du)$
+  \item $1u = u$
+\end{itemize}
+\subsection{Vector Space Conceptual Examples}
+1. Prove how the set of function $\mathbb{R} \rightarrow \mathbb{R}$ is a vector space 
+\begin{enumerate}
+  \item Proving a vector space includes verifying both closures under addition and scalar 
+    multiplication exist 
+  \begin{enumerate}
+    \item Let $f, g$ be two functions from $\mathbb{R}$ to $\mathbb{R}$ 
+    \[
+      (f + g)x = f(x) + g(x)
+    \]
+    \item For scalar $c$, define $cf$ by 
+    \[
+      (cf)(x) = cf(x)
+    \]
+  \end{enumerate}
+\end{enumerate}
+2. Prove that the set of all $2 \times 2$ matrices is a vector space. 
+\begin{enumerate}
+  \item Verify with Addition 
+  \[
+    \begin{bmatrix} a & b \\ c & d \end{bmatrix} + 
+    \begin{bmatrix} e & f \\ g & h \end{bmatrix} = 
+    \begin{bmatrix} a + e & b + f \\ c + g & d + h \end{bmatrix}
+  \]
+  \item Verify with Scalar Multiplication 
+  \[
+    e \cdot \begin{bmatrix} a & b \\ c & d \end{bmatrix} = 
+    \begin{bmatrix} ea & eb \\ ec & ed \end{bmatrix}
+  \]
+\end{enumerate}
+Let $V$ be a vector space, such that a non-empty subset $W \subseteq V$ can only be 
+a subspace of $V$ when 
+\begin{itemize}
+  \item $u + v$ for all $u, v \in U$ (closed under addition) 
+  \item $cu$ for all $u \in U$ and $c \in \mathbb{R}$ (closed under scalar multiplication)
+\end{itemize}
+\subsection{Example Proofs}
+1. Show why the set of all symmetric $2 \times 2$ matrices is a subspace of the vector space 
+of $2 \times 2$ matrices. \\\\
+The set of symmetric matrices of a given size is non-empty since the zero matrix is symmetric. 
+Let $A, B$ be two symmetric $2 \times 2$ matrices. Therefore $A^T = A$ and $B^T = B$ 
+\[
+  (A + B)^T = A^T + B^T = A + B
+\]
+\[
+  (cA)^T = cA^T = cA
+\]
+Therefore, the set is closed under addition and scalar multiplication. \\\\
+2. Prove or disprove why the set of all invertible $2 \times 2$ matrices is a subspace 
+of the vector space of $2 \times 2$ matrices. \\\\
+We cannot prove this because the set is not closed under addition
+\begin{enumerate}
+  \item Recall that invertible matrices occur when $AB = BA = I$, where $A$ and $B$ are 
+    two matrices and $I$ is the identity matrix
+    \begin{itemize}
+      \item $2 \times 2$ identity matrix, $I = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$
+      \item A matrix is invertible if a matrix's determinant isn't zero. 
+        Take two invertible matrices, $A = \begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}$
+        and $B = I$. 
+      \item $A + B = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}$. 
+        This is the zero vector, which is not invertible!
+    \end{itemize}
+\end{enumerate}
+3. Let $\mathbb{P}_n$ be the set of all polynomials of degree at most $n$, where 
+\[
+  \mathbb{P}_n = \left\{a_0 + a_1t + a_2t^2 + \cdots + a_nt^n 
+    : a_0, \dots, a_n \in \mathbb{R}\right\}
+\]
+Prove why it is a vector space. Is it a subspace of the vector space of all functions 
+$\mathbb{R} \rightarrow \mathbb{R}$?
+\\\\ Let $p(t) = a_0 + a_1t + \cdots + a_nt^n$ and $q(t) = b_0 + b_1t + \cdots + b_nt^n$ 
+be two polynomials of degree at most $n$. and $q(t) = b_0 + b_1t + \cdots + b_nt^n$ be 
+two polynomials of degree at most $n$. Therefore, 
+\[
+  (p + q)(t) = (a_0 + b_0) + (a_1 + b_1)t + \cdots + (a_n + b_n)t^n 
+\] is also a polynomial of degree at most $n$ and 
+\[
+  (cp)(t) = (ca_0) + (ca_1)t + \cdots + (ca_t)t^n
+\] is also a polynomial of degree at most $n$. 
+\section{Linear Independence}
+Recall that vectors $v_1, \dots, v_p$ are said to be linearly independent if the equation 
+\[
+  x_1v_1 + x_2v_2 + \cdots + x_pv_p = 0
+\]
+has only the trivial solution (namely, $x_1 = x_2 = \cdots = x_p = 0$)
+\subsection{Verifying Linear Indepdence}
+Let vector $v = \begin{bmatrix}1 \\ 1\end{bmatrix}$ and 
+$w = \begin{bmatrix}2 \\ 2\end{bmatrix}$. Are $v$ and $w$ linearly indepedent?
+\\\\
+No because it does not have a $(0, 0)$ solution! this is called linear dependence! 
+\[
+  x_1\begin{bmatrix}1 \\ 1\end{bmatrix} + x_2\begin{bmatrix}2 \\ 2\end{bmatrix} = 
+  \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+\]
+\[
+  x_1 + 2x_2 = 0 \text{ and } x_1 + 2x_2 = 0, \text{ where } x_1 = -2x_2
+\] Therefore, we can write the solution vector as 
+\[
+  \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}, \text{ where } 
+  \begin{bmatrix} -2x_2 \\ x_2 \end{bmatrix} = 
+  x_2\begin{bmatrix} -2 \\ 1\end{bmatrix}
+\] 
+Simply speaking, the vectors can't be linearly indepdendent because  
+$\begin{bmatrix} 2 \\ 2 \end{bmatrix} \in \text{span}\begin{bmatrix} 1\\1 \end{bmatrix}$, 
+indicating that $\begin{bmatrix} 2 \\ 2 \end{bmatrix}$ is a possible linear combination of 
+$\begin{bmatrix} 1 \\ 1 \end{bmatrix}$, which it is because $2 \cdot 
+\begin{bmatrix} 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 2 \\ 2 \end{bmatrix}$ \\\\
+Therefore, vectors $v_1, \dots, v_p$ are linear dependent if and only if there is 
+$i \in \left\{1, \dots, p\right\}$, such that $v_i \in \text{span}(v_1, \dots, v_{i - 1}, 
+v_{i + 1}, \dots, v_p)$. \\\\
+\begin{itemize}
+  \item Single non-zero vectors are always linear independent because $x_1v_1 = 0$ only exists 
+when $x_1 = 0$ 
+  \item Two vectors $v_1, v_2$ are linearly independent if and only if neither of the vectors 
+    is a multiple of the other 
+    \[
+      x_1v_1 + x_2v_2 = 0, \text{ where } x_2 \neq 0 \rightarrow v_2 = -\frac{x_1}{x_2}v_1 
+    \]
+  \item Vectors $v_1, \dots, v_p$ containing the zero vector are linearly dependent. If
+    \[
+      v_1 = 0 \rightarrow v_1 + 0v_2 + \cdots + 0v_p = 0
+    \]
+\end{itemize}
+1. Determine if vectors $\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}$, 
+$\begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$, and 
+$\begin{bmatrix} -1 \\ 1 \\ 3 \end{bmatrix}$ are linearly independent. 
+\[
+  x_1\begin{bmatrix} 1\\1\\1\end{bmatrix} + x_2 \begin{bmatrix}1 \\ 2 \\ 3\end{bmatrix} 
+  + x_3\begin{bmatrix}-1 \\ 1\\ 3\end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 
+  \end{bmatrix}
+\] forms the matrix 
+\[
+  \left[
+    \begin{array}{ccc|c}
+      1 & 1 & -1 & 0 \\
+      1 & 2 & 1 & 0 \\
+      1 & 3 & 3 & 0
+    \end{array}
+  \right] 
+\] Use RREF to get the solution of the system 
+\[
+  \left[
+    \begin{array}{ccc|c}
+      1 & 0 & -3 & 0 \\
+      0 & 1 & 2 & 0 \\
+      0 & 0 & 0 & 0
+    \end{array}
+  \right]
+\]
+\[
+  x_3 = \text{free}; x_2 = -2x_3; x_1 = 3x_3
+\]
+Let $x_3 = 1$ 
+\[
+  3\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} - 2 \begin{bmatrix}1 \\ 2 \\ 3\end{bmatrix} + 
+  \begin{bmatrix} -1 \\ 1 \\ 3 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+\]
+Yes! They are linearly dependent. The third vector relies on the sum of the first two 
+vectors. This happens because there is a free variable in their system. \\\\
+Recall that this can be written as a matrix equation, $Ax = b$, where $b$ is simply $0$ 
+\[
+  \begin{bmatrix}
+    1 & 1 & -1 \\
+    1 & 2 & 1 \\
+    1 & 3 & 3
+  \end{bmatrix} \begin{bmatrix}
+3 \\ -2 \\ 1 \end{bmatrix} = 0
+\] Therefore, the nullspace is what determines linear independence \\\\
+Given that $A$ is an $m \times n$ matrix. The following are equivalent 
+\begin{itemize}
+  \item The columns of $A$ are linearly independent 
+  \item $Ax = 0$ has only the solution $x = 0$ 
+  \item $A$ has $n$ pivots 
+  \item there are no free variables for $Ax = 0$ 
+\end{itemize}
+\subsection{Linear Independence Conceptual Questions}
+1. Let $v_1, \dots, v_n \in \mathbb{R}^m$. If $n > m$, then $v_1, \dots, v_n$ are linearly 
+dependent. Why?
+\\\\
+Suppose $A$ is the matrix that consists of vectors $v_1, \dots, v_n$, which is an 
+$m \times n$ matrix. 
+\begin{itemize}
+  \item There can be at most $m$ pivots
+  \item $A$ cannot have $n$ pivots because $n > m$ 
+  \item Therefore, $A$'s columns must be linearly dependent 
+\end{itemize}
+2. Consider an $m \times n$ matrix $A$ in echelon form. Why are the pivot columns of $A$ 
+linearly indepdent? \\\\
+Suppose $A = \begin{bmatrix}a_1 & a_2 & a_3\end{bmatrix}$ and $a_1, a_3$ are the pivot columns 
+The matrix $\begin{bmatrix} a_1 & a_3\end{bmatrix}$ has $2$ pivots. This makes the vectors 
+$a_1, a_3$ linearly independent. 
+\section{Basis and Dimension}
+\textbf{Basis} - The a sequence of vectors $(v_1, \dots, v_p)$ in vector space $V$, where 
+\begin{itemize}
+  \item $V = \text{span}(v_1, \dots, v_p)$ 
+  \item $(v_1, \dots, v_p)$ are linearly independent 
+\end{itemize}
+1. Are $(\begin{bmatrix}1 \\ 0\end{bmatrix}, \begin{bmatrix}0 \\ 1\end{bmatrix})$ and 
+$(\begin{bmatrix}1 \\ 1\end{bmatrix}, \begin{bmatrix}1 \\ -1\end{bmatrix})$ bases of 
+$\mathbb{R}^2$?
+\begin{enumerate}
+  \item Verify linear indepdence 
+    \[
+      \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+    \] has two pivots and 
+    \[
+      \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+    \] has two pivots 
+  \item Determine the spanning set 
+    \[
+      \begin{bmatrix}a \\ b\end{bmatrix} = a\begin{bmatrix}1 \\ 0\end{bmatrix} + 
+      b\begin{bmatrix}0 \\ 1\end{bmatrix} = \frac{a+b}{2}\begin{bmatrix}1 \\ 1\end{bmatrix} 
+      + \frac{a-b}{2}\begin{bmatrix}1 \\ -1\end{bmatrix}
+    \] 
+\subsection{Dimension}
+Every two bases in a vector space $V$ contain the same numbers of vectors \\\\
+\textbf{Dimension} - The number of vectors in a basis of $V$ \\\\
+The dimension of $\mathbb{R}^n$ is $n$ 
+\[
+  e_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, 
+  e_2 = \begin{bmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix},
+  \cdots, 
+  e_n = \begin{bmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}
+\] where $(e_1, e_2, \dots, e_n)$ is the basis of $\mathbb{R}^n$
+\[
+  [e_1 \dots e_n] = I_n \rightarrow n \text{ pivots}, 
+  \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix} = 
+  v_1e_1 + \cdots + v_ne_n
+\] Therefore, dim $\mathbb{R}^n = n$ \\\\
+Suppose that $V$ has dimension $d$ 
+\begin{itemize}
+  \item A sequence of $d$ vectors in $V$ are a basis if they span $V$ 
+  \item A sequence of $d$ vectors in $V$ are a basis if they are linearly independent 
+\end{itemize}
+\subsection{Determining Basis}
+1. Determine whether $(\begin{bmatrix} 1 \\ 2 \\ 0 \end{bmatrix}, 
+\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \\ 3 \end{bmatrix})$
+is a basis of $\mathbb{R}^3$ \\\\
+The set has $3$ elements, where dim $\mathbb{R}^3 = 3$. Therefore, it is a basis if and 
+only if the vectors are linearly independent. \\\\ 
+Form a matrix of the vectors and convert to row echelon form to determine 
+pivots. 
+\[
+  \begin{bmatrix} 1 & 0 & 1 \\
+    2 & 1 & 0 \\ 
+    0 & 1 & 3 \\
+  \end{bmatrix} \rightarrow 
+    \begin{bmatrix} 1 & 0 & 1 \\
+    0 & 1 & -2 \\ 0 & 0 & 5 \end{bmatrix}
+\] Since each column contains a pivot, the three vectors are linearly independent. 
+Therefore, it is indeed a basis of $\mathbb{R}^3$ \\\\
+A \textbf{basis} is the smallest set of vectors that span $V$, where removing any vector from it 
+would mean it no longer spans $V$. \\\\
+Produce a basis of $\mathbb{R}^2$ from the vectors, such that 
+\[
+  v_1 = \begin{bmatrix} 1 \\ 2 \end{bmatrix}, v_2 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, 
+  v_3 = \begin{bmatrix} -.5 \\ -2 \end{bmatrix}
+\] To produce a basis, the minimal set of vectors must be linearly independent. Create a vector 
+equation with two of the vectors. 
+\[
+  \begin{bmatrix} 1 \\ 1 \end{bmatrix} = a\begin{bmatrix} 1 \\ 2 \end{bmatrix} + 
+  b\begin{bmatrix} -.5 \\ -2 \end{bmatrix}
+\]
+\[
+  \begin{cases}
+    a - .5b = 1 \\
+    2a - 2b = 1
+  \end{cases} \rightarrow b = 1, a = 1.5 
+\] This means that 
+\[
+  v_2 = 1.5v_1 + v_3
+\] Therefore, $v_2$ is a linear combination of $v_1$ and $v_3$, meaning that
+$\left\{ v_1, v_3 \right\}$ is the basis for $\mathbb{R}^2$ because the two vectors 
+are linearly independent. 
+2. Produce a basis of $\mathbb{R}^2$ from the vector $\begin{bmatrix} 2 \\ 1 \end{bmatrix}$
+\\\\
+Any vector that is not in the span$(\begin{bmatrix} 2 \\ 1 \end{bmatrix})$. One such vector 
+is $\begin{bmatrix} 1 \\ 0 \end{bmatrix}$. Therefore, $(\begin{bmatrix} 2 \\ 1 \end{bmatrix}
+, \begin{bmatrix} 1 \\ 0 \end{bmatrix})$ is a basis.
+\section{Bases and Dimension for the four fundamental subspaces}
+Find a basis for Nul($A$)
+\begin{itemize}
+  \item Find teh parametric form of the solutions to $Ax = 0$ 
+  \item Express solutions $x$ as a linear combination of vectors with the free variables 
+    as coefficients 
+  \item Use these vectors as a basis of Nul($A$)
+\end{itemize} \\\\
+For example, let $A = \begin{bmatrix} 3 & 6 & 6 & 3 & 9 \\
+6 & 12 & 15 & 0 & 3 \end{bmatrix}$ 
+\[
+  \begin{array}{ccccc|c} 
+    1 & 2 & 0 & 5 & 13 & 0 \\
+    0 & 0 & 1 & -2 & -5 & 0 
+  \end{array}{ccccc|c}
+\]
+\[
+  \begin{cases}
+  x_1 = -2x_2 - 5x_4 - 13x_5 \\
+  x_3 = 2x_4 + 5x_5
+  \end{cases}
+\] where $Ax = 0$'s solutions are 
+\[
+  \begin{bmatrix} -2x_2 - 5x_4 - 13x_5 \\ x_2 \\ 2x_4 + 5x_5 \\ x_4 \\ x_5 
+  \end{bmatrix} = 
+  x_2 \begin{bmatrix} -2 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} + 
+  x_4 \begin{bmatrix} -5 \\ 0 \\ 2 \\ 1 \\ 0 \end{bmatrix} + 
+  x_5 \begin{bmatrix} -13 \\ 0 \\ 5 \\ 0 \\ 1 \end{bmatrix}
+\] where the basis is 
+\[
+  \begin{bmatrix} -2 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}, 
+  \begin{bmatrix} -5 \\ 0 \\ 2 \\ 1 \\ 0 \end{bmatrix},
+  \begin{bmatrix} -13 \\ 0 \\ 5 \\ 0 \\ 1 \end{bmatrix}
+\]
+\subsection{Rank}
+\textbf{Rank} - the number of pivots a matrix has \\\\
+Big Ideas
+\begin{itemize}
+  \item Given matrix $A$ with an $m \times n$ matrix with rank $r$ $\rightarrow$ 
+  dim Nul($A$) = $n - r$
+  \item Suppose matrix $U = \begin{bmatrix} u_1 \cdots u_n \end{bmatrix}$ 
+  is a row echelon form of $A$. 
+  \[
+    x_1u_1 + \cdots + x_nu_n = 0 \leftrightarrow Ax = 0 
+    \leftrightarrow x_1a_1 + \cdots + x_na_n = 0
+  \] because $A$ and $U$ are row equivalent.
+\end{itemize}
+Let $A$ be an $m \times n$ matrix with rank $r$. The pivot columns of $A$ form a basis 
+of Col($A$), where dim Col($A$) = $r$
+\begin{itemize}
+  \item this is because if $U$ is the RREF of $A$, then the pivot columns of $U$ and $A$
+  must be linearly independent
+\end{itemize} \\\\
+For example, if $A = \begin{bmatrix} 1 & 2 & 0 & 4 \\ 2 & 4 & -1 & 3 \\ 3 & 6 & 2 & 22 \\ 
+4 & 8 & 0 & 16 \end{bmatrix}$, the basis of Col($A$) is simply the columns that contain a pivot 
+\\\\ Let $U$ be the matrix of $A$ in echelon form
+\[
+  \begin{bmatrix} 1 & 2 & 0 & 4 \\
+  0 & 0 & 1 & 5 \\
+  0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 
+  \end{bmatrix}
+\]
+Columns $1$ and $3$ contain the pivot columns. Therefore, the basis of Col($A$) are 
+\[
+  \left\{
+    \begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix},
+    \begin{bmatrix} 0 \\ -1 \\ 2 \\ 0 \end{bmatrix}
+  \right\}
+\] where $u_2 = 2u_1$ and $u_4 = 4u_1 + 5u_3$ \\\\
+Let $A = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}$ 
+where $U = \begin{bmatrix} 1 & 3 \\ 0 & 0 \end{bmatrix}$, the RREF of $A$. \\\\
+Col($A$) $\neq$ Col($U$) because row operations do not preseve the column space, 
+but rather the row space. This means that Col($A^T$) = Col($U^T$)
+\[
+  \text{span}(\begin{bmatrix} 1 \\ 2 \end{bmatrix}) \neq 
+  \text{span}(\begin{bmatrix} 1 \\ 0 \end{bmatrix})
+\]
+However, considering the transposes of $A$ and $U$, 
+\[
+  \text{span}(\begin{bmatrix}1 \\ 3\end{bmatrix}) = 
+  \text{span}(\begin{bmatrix}1 \\ 3\end{bmatrix})
+\] Therefore, if $A$ and $B$ are two row equivalent matrices, then Col($A^T$) = Col($B^T$). 
+Similarly, if $A$ is an $m \times n$ matrix with a rank $r$, then the non-zero rows in 
+echelon form form a basis of Col($A^T$) and therefore dim($A^T$) = $r$ \\\\
+If $A$ is an $m \times n$ matrix with rank $r$, then
+\begin{itemize}
+  \item dim Col($A$) = dim Col($A^T$) = $r$ 
+  \item dim Nul($A$) = $n - r$
+\end{itemize}
+\subsection{Examples}
+Determine dim Nul($A^T$) and dim Col($A$) + dim Nul($A$)?
+\[
+  \text{dim Nul}(A^T) = m - r 
+\]
+\[
+  \text{dim Col}(A) + \text{dim Nul}(A) = r + (n - r) = n
+\]
+\section{Orthogonal Complements}
+Let $A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \\ 3 & 6 \end{bmatrix}$.
+\[
+  U = \text{$A$ in RREF} = \begin{bmatrix} 1 & 2 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}, \text{where }
+  \text{Nul}(A) = \text{span}(\begin{bmatrix} -2 \\ 1 \end{bmatrix})
+\]
+\[
+  \text{Col}(A^T) = \text{span}(\begin{bmatrix} 1 \\ 2 \end{bmatrix})
+\]
+Given a subspace $V$ of $\mathbb{R}^n$, the \textbf{orthogonal complement} of $V$, $(V^\perp)$,
+is the subspace of all vectors in $\mathbb{R}^n$ that are orthogonal to every vector in $V$
+\[
+  W^\perp = \left\{ v \in \mathbb{R}^n : v \cdot w = 0 \text{ for all } w \in W\right\}
+\] Note that $(W^\perp)^\perp = W$
+\\\\
+Let $A$ be an $m \times n$ matrix. Nul($A$) is the orthogonal complement of Col$(A^T)^\perp$, where Nul($A$) = Col$(A^T)^\perp$
+\begin{itemize}
+  \item Nul$(A)^\perp$ = Col($A^T$)
+  \item Nul$(A^T)$ = Col$(A)^\perp$
+\end{itemize}
+Let $V$ be a subspace of $\mathbb{R}^n$. Then dim $V$ + dim $V^\perp$ $=$ $n$ 
+\subsection{Examples}
+Find a basis of the orthogonal complement of span($\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, 
+\begin{bmatrix} 0 \\ 1 \\ 1 \end{bmatrix}$)
+\[
+  A = \begin{bmatrix} 1 & 0 \\ 0 & 1 \\ 0 & 1 \end{bmatrix} \rightarrow A^T = \begin{bmatrix}
+  1 & 0 & 0 \\ 0 & 1 & 1 \end{bmatrix}
+\]
+\[
+  A^Tx = 0 \rightarrow x_1 = 0 \rightarrow x_2 = -x_3
+\]
+\[
+  \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 0 \\ -x_3 \\ x_3 \end{bmatrix} 
+  \rightarrow x_3 \begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix}
+\] Therefore,
+$\begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix}$ is the basis of Nul($A^T$)
+\section{Coordinates}
+Let $(v_1, \dots, v_p)$ be a basis of $V$. Then every vector $w$ in $V$ can be expressed uniquely as 
+- $w = c_1v_1 + \dots + c_pw_p$ \\\\
+Let $\beta = (v_1, v_2, \dots, v_p)$ be an ordered basis of $V$, and let $w \in V$. The coordinate 
+vector, $w_\beta$ of $w$ with respect to the basis $\beta$ is 
+\[
+  w_\beta = \begin{bmatrix} c_1 \\ c_2 \\ c_3 \\ \vdots \\ c_p \end{bmatrix}, \text{ if }
+  w = c_1v_1 + c_2v_2
+\]
+Let $V = \mathbb{R}^2$ and consider the bases
+\subsection{Example}
+\[
+  \beta = (b_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, b_2 = \begin{bmatrix} 1 \\ -1 \end{bmatrix})
+\]
+\[
+  \epsilon = (e_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}, e_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix})
+\]
+Let $w = \begin{bmatrix} 3 \\ 1 \end{bmatrix}$. Determine $w_{\beta}$ and $w_{\epsilon}$
+\[
+  \begin{bmatrix} 3 \\ -1 \end{bmatrix} = c_1\begin{bmatrix} 1 \\ 1 \end{bmatrix} + 
+  c_2\begin{bmatrix} 1 \\ -1 \end{bmatrix} = 1\begin{bmatrix} 1 \\ 1 \end{bmatrix} + 
+  2 \begin{bmatrix} 1 \\ -1 \end{bmatrix}
+\] Therefore, $w_{\beta} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}$ \\\\
+Similarly, 
+\[
+  \begin{bmatrix} 3 \\ -1 \end{bmatrix} = c_1 \begin{bmatrix} 1 \\ 0 \end{bmatrix} + c_2 
+  \begin{bmatrix} 0 \\ 1 \end{bmatrix} = 3 \begin{bmatrix} 1 \\ 0 \end{bmatrix} - 1 
+  \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+\] Therefore, $w_{\epsilon} = \begin{bmatrix} 3 \\ -1 \end{bmatrix}$ \\\\
+In $\mathbb{R}^n$, let $e$ be the vector with a $1$ in the $i$-th coordinate and $0$'s elsewhere. The standard basis of $\mathbb{R}^n$ is the ordered basis $\epsilon_n = (e_1, \dots, e_n)$
+\subsection{Example}
+1. $\forall_v v \in \mathbb{R}^n$, we have $v = v_{\epsilon_n}$. Why?
+\[
+  v = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix} = v_1e_1 + \cdots + v_ne_n \rightarrow
+  v_\epsilon_n = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}
+\]
+2. Suppose basis $\beta = (b_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, b_2 = \begin{bmatrix} 1 \\ -1 
+\end{bmatrix})$ of $\mathbb{R}^2$. Let $v \in \mathbb{R}^2$ be such that $v_\beta = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$. What is $v$? 
+\[
+  v_\beta = \begin{bmatrix} 2 \\ 1 \end{bmatrix} \rightarrow v = 2b_1 + b_2 = \begin{bmatrix} 3 \\ 1 
+  \end{bmatrix}
+\]
+\subsection{Change of Basis}
+\textbf{Change of Basis} - The matrix $I_{C_\beta}$, such that for all $v \in \mathbb{R}^n \rightarrow
+I_{C, \beta}v_{\beta} = v_{C}$, given that $\beta$ and $C$ are two bases of $\mathbb{R}^n$
+Let $\beta = (b_1, \dots, b_n)$ be a basis of $\mathbb{R}^n$. Then,
+\[
+  I_{\epsilon_n, \beta} = \begin{bmatrix} b_1 & \dots & b_n \end{bmatrix}
+\] for all $v \in \mathbb{R}^n$
+\[
+  v = \begin{bmatrix} b_1 & \dots & b_n \end{bmatrix} v_\beta
+\]
+\subsection{Change of Basis Examples}
+3. if $\beta = (b_1, \dots, b_n)$ is a basis of $\mathbb{R}^n$, then what is $i_{\beta,\epsilon_n}$
+\[
+  v = I_{\epsilon_n, \beta}v_\beta \rightarrow I^{-1}_{\epsilon_n, \beta} = v_\beta
+\]
+2. If $\beta$ and $C$ are two bases of $\mathbb{R}^n$, what is $I_{\beta, C}$?
+\[
+  I_{B,\epsilon_n}I_{\epsilon_n,C}v_C = I_{\beta, \epsilon_n}v = v_\beta \rightarrow I_{\beta, C}
+  = I_{\beta, \epsilon_n}I_{\epsilon_n, C}
+\]
+An easier way to computer $I_{C, \beta}$
+\[
+  I_{C, \beta} = [(b_1)_C \dots (b_n)_C] \text{ or } I_{\epsilon, \beta} 
+  = \begin{bmatrix} b_1 \dots b_n \end{bmatrix}
+\]
+\section{Orthogonal and Orthonormal Bases}
+Let $v_1, \dots, v_m \in \mathbb{R}^n$ be non-zero and pairwise orthogonal. Then $v_1, \dots, v_m$ are 
+linearly independent. This implies that a set of $n$ orthonormal vectors in $\mathbb{R}^n$ is a 
+basis of $\mathbb{R}^n$ \\\\
+\textbf{Orthogonal/Orthonormal Basis} - An orthogonal/orthonormal set of vectors that forms a basis \\\\
+Let $\beta = (b_1, b_2, \dots, b_n)$ be an orthogonal basis of $\mathbb{R}^n$ and let 
+$v \in \mathbb{R}^n$. Then 
+\[
+  v = \frac{v \cdot b_1}{b_1 \cdot b_1}b_1 + \dots + \frac{v \cdot b_n}{b_n \cdot b_n}b_n
+\]
+If $\beta$ is orthonormal, then $b_i \cdot b_i = 1$ for $i = 1, \dots, n$
+\subsection{Practice Problems}
+1. Let $\upsilon$ be the orthonormal basis $(u_1 = \frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ 1\end{bmatrix}, 
+u_2 = \frac{1}{\sqrt{2}} \begin{bmatrix}-1 \\ 1\end{bmatrix})$ of $\mathbb{R}^2$. Let $v = \begin{bmatrix}
+2 \\ 3 \end{bmatrix}$. Determine $v_\upsilon$ using the formula from the previous theorem! 
+\[
+  v_\upsilon = \begin{bmatrix} u_1 \cdot v \\ u_2 \cdot v \end{bmatrix} = \begin{bmatrix} 
+\frac{5}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{bmatrix}
+\]
+2. Given the same $\upsilon$, calculate the change of basis matrix 
+$I_{\upsilon, \epsilon_2}$
+\[
+  I_{\upsilon, \epsilon_2} = I^{-1}_{\epsilon_2, \upsilon} = (\frac{1}{\sqrt{2}} 
+  \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix})^{-1} = \frac{1}{\sqrt{2}} 
+  \begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix} = I^T_{\epsilon_2, \upsilon}
+\] Therefore, if $\upsilon = (u_1, \dots, u_n)$ is a orthonormal basis of 
+$\mathbb{R}^n$, then 
+\[
+  I_{\upsilon, \epsilon_n} = \begin{bmatrix} u_1 \dots u_n \end{bmatrix}^T
+\]
+An $n \times n$ matrix $Q$ is orthogonal if $Q^-1 = Q^T$. The columns of an orthogonal 
+matrix form an orthonormal basis. This is because the product of $Q$ and its transpose
+is the identity matrix. 
+\section{Linear Transformation}
+Let $V$ and $W$ be vector spaces. A map $T : V \rightarrow W$ is 
+a \textbf{linear transformation} if 
+\[
+  T(av + bw) = aT(v) + bT(w)
+\]
+for all $v, w \in V$ and all $a, b \in \mathbb{R}$ \\\\
+If $V = \mathbb{R}$ and $W = \mathbb{R}$, explain why $f(x) = 3x$ is linear and 
+$g(x) = 2x - 2$ is not. 
+\[
+  f(ax + by) = 3(ax + by) = 3ax + 3by = af(x) + bf(y)
+\]
+$g(x) = 2x - 2$ 
+\[
+  g(0) + g(0) = 2 \cdot 0 - 2 + 2 \cdot 0 - 2 = -4 \neq -2 = g(0) = g(0 + 0)
+\]
+This means that $T(0_v) = T(0 \cdot 0_v) = 0 \cdot T(0_v) = 0_w$ \\\\
+Let $A$ be an $m \times n$ matrix, and consider the map $T : \mathbb{R}^n \rightarrow 
+\mathbb{R}^m$ given by $T(v) = Av$. Is this a linear transformation? 
+\[
+  T(cv + dw) = cT(v) + dT(w)
+\] Yes! because matrix multiplication is linear! 
+Similarly, differentiation is linear as well 
+\[
+  \frac{d}{dt}\begin{bmatrix}ap(t) \\ bq(t)\end{bmatrix}
+  = a\frac{d}{dt}p(t) + b\frac{d}{dt}q(t)
+\]
+If $V, W$ are two vector spaces, then $T : V \rightarrow W$ is a 
+linear transformation where $(v_1, \dots, v_n)$ represents a basis of $V$. 
+$T$ is completely determined by the values of $T(v_1), \dots, T(v_n)$
+\subsection{Examples}
+Let $T \rightarrow \mathbb{R}^2 \rightarrow \mathbb{R}^3$ be a linear transformation 
+with $T(\begin{bmatrix} 1 \\ 0 \end{bmatrix}) = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$ 
+and $T(\begin{bmatrix} 0 \\ 1 \end{bmatrix}) = \begin{bmatrix} 0 \\ 0 \\ -2 \end{bmatrix}$. Find $T(\begin{bmatrix} 1 \\ 2 \end{bmatrix})$. 
+\[
+  \begin{aligned}
+    T(\begin{bmatrix} 1 \\ 2 \end{bmatrix}) &= T(1 \begin{bmatrix} 
+    1 \\ 0 \end{bmatrix} + 2 \begin{bmatrix}0 \\ 1 \end{bmatrix}) \\
+                                            &= T(\begin{bmatrix} 1 \\ 
+                                            0 \end{bmatrix}) + 
+                                            2T(\begin{bmatrix} 0 \\ 1 
+                                              \end{bmatrix}) \\
+                                            &= \begin{bmatrix} 1 \\ 2 
+                                            \\ 3 \end{bmatrix} + 
+                                            2 \begin{bmatrix} 0 \\ 0 
+                                            \\ -2 \end{bmatrix} = 
+                                            \begin{bmatrix} 1 \\ 2 
+                                            \\ -1 \end{bmatrix}
+  \end{aligned}
+\]
+\subsection{Representing Linear Transformations as Matrices}
+Suppose $T : \mathbb{R}^m \rightarrow \mathbb{R}^m$ be a linear 
+transformation. Then there is an $m \times n$ matrix $A$ such that 
+\begin{enumerate}
+  \item $T(v) = Av$, for all $v \in \mathbb{R}^n$ 
+  \item $A = \begin{bmatrix} T(e_1) & T(e_2) & \dots & T(e_n) 
+    \end{bmatrix}$, where $(e_1, e_2, \dots, e_n)$ is the 
+    standard basis of $\mathbb{R}^n$
+\end{enumerate} $A$ represents the coordinate matrix of $T$ with 
+respect to the standard bases, which is formally notated as 
+$T_{\epsilon_{m}\epsilon_{n}}$
+\subsection{Example}
+Let $T_\alpha : \mathbb{R}^2 \rightarrow \mathbb{R}^2$ be the "rotation 
+over $\alpha$ radians (counterclockwise)" map, that is $T_\alpha(v)$ 
+is the vector obtained by rotating $v$ over angle $\alpha$. Find the 
+$2 \times 2$ matrix $A_\alpha$, such that $T_\alpha(v) = A_{\alpha}v$
+for all $v \in \mathbb{R}^2$ \\\\
+Figure out what happens when rotating the standard basis \\\\
+Recall that the standard basis consists of \{\begin{bmatrix} 1 \\ 0 \end{bmatrix} and \begin{bmatrix} 0 \\ 1 \end{bmatrix}\} due to the $2 \times 2$ identity matrix \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}. 
+Also recall from trigonometry that $x = cos(\alpha)$ and 
+$y = sin(\alpha)$. On the point $(1, 0)$, cosine and sine are both positive. 
+\\\\ However, when this point becomes rotated, to the point $(0, 1)$, 
+it lands on the derivative of the point $(1, 0)$. This is because 
+the derivative captures the rotation from the point $(1, 0)$ to 
+$(0, 1)$, where $\frac{dx}{da} = -sin(\alpha)$ and $\frac{dy}{da} = cos(\alpha)$. Therefore,
+\[
+T_\alpha(\begin{bmatrix} 1 \\ 0 \end{bmatrix}) = \begin{bmatrix} 
+cos(\alpha) \\ sin(\alpha) \end{bmatrix}, \text{  } T_\alpha(\begin{bmatrix} 
+0 \\ 1 \end{bmatrix}) = \begin{bmatrix} -sin(\alpha) \\ cos(\alpha) \end{bmatrix} 
+\]
+\[A_\alpha = \begin{bmatrix} cos(\alpha) & -sin(\alpha) \\ sin(\alpha) 
+  & cos(\alpha) \end{bmatrix}\]
+\section{Coordinate Matrix of a Linear Transformation}
+Let $V, W$ be two vector space and let $\beta = (b_1, \dots, b_n)$ 
+be a basis of $V$ and $C = (c_1, \dots, c_m)$ be a basis of $W$. 
+Let $T : V \rightarrow W$ be a linear transformation. Then there is a $m 
+\times n$ matrix $T_{C, \beta}$ such that 
+\begin{enumerate}
+  \item $T(v)_c = T_{C,\beta}v_\beta$
+  \item $T_{c, \beta} = \begin{bmatrix} T(b_1)_c & T(b_2)_c & \dots & 
+    T(b_n)_c \end{bmatrix}$
+\end{enumerate}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{lin-transformations.png}
+    \caption{Example screenshot of the transformation diagram}
+    \label{fig:transformation-diagram}
+\end{figure}
+The diagram above shows a linear transformation diagram when any linear 
+transformation $T : V \rightarrow W$ interacts with bases. It explains 
+how applying a linear transformation in abstract vector spaces is 
+equivalent to multiplying coordinate vectors by a matrix in 
+$\mathbb{R}^n$ when everything is expressed in terms of bases. \\\\ 
+From the top arrow, left arrow, bottom arrow, and right arrow 
+respectively,
+\begin{itemize}
+  \item Apply the transformation $T$ to a vector $\vec{v} \in V$, and 
+    get $T(\vec{v}) \in W$
+  \item Write in coordintates with respect to $\beta^n$
+  \item Multiply by $T_{c, \beta}$ and apply the matrix representation 
+    of $T$ to the coordinate vector 
+  \item Write in coordinates with respect to $C$. Convert the 
+    transformed vector $T(\vec{v}) \in W$ to its coordinate form in 
+    $\mathbb{R}^m$
+\end{itemize}
+\subsection{Examples}
+1. Let $D : \mathbb{P}_2 \rightarrow \mathbb{P}_1$ be given by $D(p(t)) = 
+\frac{d}{dt} p(t)$. Consider the bases $\beta = (1, t, t^2)$ and 
+$C = (1, t)$ of $\mathbb{P}_2$ and $\mathbb{P}_1$. Determine 
+$D_{C, \beta}$. 
+\[
+  \begin{aligned}
+    D_{C, \beta} &= \begin{bmatrix} D(1) & D(t) & D(t^2) \end{bmatrix} \\\\
+    D(1) &= 0 = 0 \cdot 1 + 0 \cdot t \\ 
+    D(t) &= 1 = 1 \cdot 1 + 0 \cdot t \\
+    D(t^2) &= 2t = 0 \cdot 1 + 2 \cdot t
+  \end{aligned}
+\] 
+\[
+  D_{C, \beta} = \begin{bmatrix} D(1)_c & D(t)_c & D(t^2)
+_c \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 2 
+\end{bmatrix}
+\]
+2. Consider $p(t) = 2 - t + 3t^2$ in $\mathbb{P}_2$. Compute 
+$D(p(t))_C$ and $D_{C, \beta}p(t)_\beta$ 
+\[
+  D(2 - t + 3t^2) = -1 + 6t \rightarrow D(p(t))_c = \begin{bmatrix}
+     -1 \\ 6 \end{bmatrix}
+\]
+\[
+  p(t)_\beta = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix} \rightarrow 
+  D_{C, \beta}p(t)_\beta = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 2 
+    \end{bmatrix} \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix} = 
+    \begin{bmatrix} -1 \\ 6 \end{bmatrix}
+\]
+3. Let $T : \mathbb{R}^2 \rightarrow \mathbb{R}^2$ be such that 
+    $T(v) = \begin{bmatrix} 3 & 1 \\ 1 & 3 \end{bmatrix}v$. Consider 
+    the basis $\beta := (b_1  = \begin{bmatrix} 1 \\ -1 \end{bmatrix}, 
+    b_2 = \begin{bmatrix} 1 \\ 1 \end{bmatrix})$. Compute $T_{\beta, 
+    \beta}$
+\[
+  \begin{aligned}
+    T(b_1) &= T(\begin{bmatrix} 1 \\ -1 \end{bmatrix}) = \begin{bmatrix}
+    3 & 1 \\ 1 & 3 \end{bmatrix} \begin{bmatrix} 1 \\ -1 \end{bmatrix} 
+    = 2 \begin{bmatrix} 1 \\ -1 \end{bmatrix} = 2b_1 + 0b_2 \\
+    T(b_2) &= T(\begin{bmatrix} 1 \\ 1 \end{bmatrix}) = 
+    \begin{bmatrix} 3 & 1 \\ 1 & 3 \end{bmatrix} 
+    \begin{bmatrix} 1 \\ 1 \end{bmatrix} = 4 \begin{bmatrix} 1 \\ 1 
+  \end{bmatrix} = 0b_1 + 4b_2
+  \end{aligned}
+\]
+This results in the coordinate matrix $T_{\beta, \beta}$, where 
+$T_{\beta, \beta} = \begin{bmatrix} 2 & 0 \\ 0 & 4 \end{bmatrix}$
+\subsection{Change of Basis for a matrix of a linear transformation} 
+Let $T : \mathbb{R}^m \rightarrow \mathbb{R}^n$ be a linear 
+transformation and $A$ and $\beta$ be two bases of $\mathbb{R}^m$ and 
+$C, D$ be two bases of $\mathbb{R}^n$. Then 
+\[
+  T_{C, A} = I_{C, D}T_{D, B}I_{B, A}
+\]
+\subsubsection{Example}
+Consider $\beta := D := \{\begin{bmatrix} 1 \\ 0 \end{bmatrix}, 
+\begin{bmatrix} 0 \\ 1 \end{bmatrix}\}$ and $A := C := \{\begin{bmatrix}1 \\ -1 \end{bmatrix}, \begin{bmatrix}1 \\ 1\end{bmatrix} \}$ as before. 
+Le $T : \mathbb{R}^2 \rightarrow \mathbb{R}^2$ be the linear transformation that $\begin{bmatrix}x \\ y \end{bmatrix} \rightarrow \begin{bmatrix} 
+3 & 1 \\ 1 & 3 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}$. 
+Determine $T_{C, A}$
+\[
+  T_{C, A} = I_{C, D}T_{D, B}I_{B, A} 
+\]
+\[
+  \begin{aligned}
+    I_{C, D} &= \frac{1}{2} \begin{bmatrix} 1 & -1 
+      \\ 1 & 1 \end{bmatrix} \\
+    I_{\beta, A} &= \begin{bmatrix}
+    1 & 1 \\ -1 & 1 \end{bmatrix}
+  \end{aligned}
+\]
+Since $\beta, D$ is the standard basis, $T_{D, \beta} = \begin{bmatrix}
+3 & 1 \\ 1 & 3 \end{bmatrix}$. Therefore, 
+\[T_{C, A} = \frac{1}{2} 
+\begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 3 & 1 
+\\ 1 & 3 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix} = 
+\begin{bmatrix} 2 & 0 \\ 0 & 4 \end{bmatrix}\]
+\section{Determinants}
+The \textbf{determinant} of a matrix is is a scalar, single numerical 
+value, which can be used to determine key information about a matrix. 
+\begin{enumerate}
+  \item The determinant states whether the matrix is invertible or not. 
+    When $det(A) \neq 0$, the matrix is invertible 
+  \item The determinant also states whether the matrix's corresponding 
+    system of equations has a solution, which only exists also when 
+    $det(A) \neq 0$
+\end{enumerate}
+Note that the matrix's determinant is typically notated as $det$, 
+while sometimes it may be seen as \left| \right|
+\subsection{Calculating Determinants}
+Suppose $A$ is a $n \times n$ square matrix. 
+\begin{enumerate}
+  \item $det(A) = a$, when $n = 1$ 
+  \item When $n = 2$ and $A = \begin{bmatrix} 
+       a & b \\ c & d \end{bmatrix}$, $det(A) = ad - bc$
+\end{enumerate}
+Furthermore, the determinant is the operation that assigns to each $n \times n$ matrix a number that satisfies the following conditions 
+\begin{itemize}
+  \item Normalization, where $det(I_n) = 1$ 
+  \item Affected by elementary row operations 
+  \begin{itemize}
+    \item Replacement $\rightarrow$ adding a multiple of one row 
+      to another row does not change the determinant 
+    \item Interchange $\rightarrow$ interchanging two different rows 
+      reverses the sign of the determinant 
+    \item Scaling $\rightarrow$ multiplying all entries in a row by $s$, 
+      multiplies the determinant by $s$
+  \end{itemize}
+\end{itemize}
+\subsubsection{Examples}
+1. Compute $det(\begin{bmatrix} 2 & 3 & 3 \\ 0 & 1 & 2 \\ 0 & 0 & 6 
+\end{bmatrix})$.\\\\
+Perform row operations to put matrix in row echelon form. 
+\begin{itemize}
+  \item $R_2 \rightarrow R_2 - \frac{1}{3}R_3$, $R_1 \rightarrow R_1 - \frac{1}{2}R_3$ =
+    $\begin{bmatrix} 2 & 3 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 6 \end{bmatrix}$
+  \item $R_1 \rightarrow R_1 - 3R_2$ 
+    = $\begin{bmatrix} 2 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 6 \end{bmatrix}$
+\end{itemize}
+The end result is the product of the left diagonal, in which that 
+corresponding value is $2 \cdot 1 \cdot 6 = 12$. 
+\subsection{Deriving ad - bc, the determinant of a $2 \times 2$ matrix}
+This ideal concept works for a $2 \times 2$ matrix as well, which is what derives the common formula $ad - bc$, the determinant of a $2 \times 2$ 
+matrix. \\\\
+Suppose matrix $A$, where 
+\[
+  A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}
+\]
+$A$ in row echelon form would then be equivalent to 
+\[
+  \begin{bmatrix} a & b \\ 0 & d - \frac{c}{a}b \end{bmatrix}
+\] where the determinant equals the left diagonal product. 
+This works because of a row operation, which cancels out the $c$, 
+$R_2 \rightarrow R_2 - \frac{c}{a}R_1$. Note that this only works when 
+$a - 0$. If $a \neq 0$, then swap rows!
+\subsubsection{Example}
+1. Suppose $A$ is a $3 \times 3$ matrix with $det(A) = 5$. What is 
+$det(2A))$?
+\begin{enumerate}
+  \item $A$ has three rows 
+  \item multiplying each of them by $2$ produces them $2A$. 
+  \item $det(2A) = 2^3det(A) = 40$ 
+\end{enumerate}
+\subsection{Important Determinant Concepts}
+Recall that $det(A) = 0$ if and only if $A$ is not invertible. This means that if $A$ and $B$ are row equivalent, then $det(A) = 0 \leftrightarrow det(B) = 0$ because elementary row oeprations don't change whether 
+the determinant is $0$ or not. \\\\
+Therefore, $A$ can only be invertible if and only if $A$ is row-equivalent to $I_n$ and $det(A) \neq 0$. \\\\
+Similarly, if $A$ is invertible, then $det(A^{-1}) = \frac{1}{det(A)}$ and $det(A^T) = det(A)$. \\\\
+Everything about determinants with respect to row operations applies to the same with matrix $A^T$'s determinant
+\section{Cofactor Expansion}
+Let $A$ be an $n \times n$ matrix, such that $A_{ij}$ represents 
+the matrix obtained from matrix $A$ by deleting the $i^{th}$ row and 
+$j^{th}$ column of $A$ \\\\
+Repeat this process to achieve a $2 \times 2$ matrix 
+  $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$, which can be
+recalled has a determinant of $ad - bc$ \\\\
+This method is known as the \textbf{cofactor expansion} and it is 
+used to evaluate the determinant of a bigger sized square matrix
+\subsection{Example Problem}
+  Let $A = \begin{bmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \\ 
+  9 & 10 & 11 & 12 \\ 13 & 14 & 15 & 16 \end{bmatrix}$. What is 
+  $A_{23}$ and $A_{43}$?
+\[
+  \begin{aligned}
+    A_{23} &= \begin{bmatrix} 1 & 2 & 4 \\ 9 & 10 & 12 \\ 13 & 14 & 16 
+    \end{bmatrix} \\
+      A_{43} &= \begin{bmatrix} 1 & 2 & 4 \\ 5 & 6 & 8 \\ 9 & 10 & 12
+      \end{bmatrix}
+\]
+\subsection{Using Cofactor Expansion to compute a matrix's determinant}
+Given that $A$ is an $n \times n$ matrix, its $(i, j)$-cofactor is the 
+scalar $C_{ij}$, which is defined by 
+\[
+  C_{ij} = (-1)^{i + j}det(A_{ij})
+\] Therefore, for every $i, j \in \{1, \dots, n\}$,
+\[
+  \begin{aligned}
+    det(A) &= a_{i1} + C_{i1} + a_{i2} + C_{i2} + \cdots + a_{in}C_{in} \\
+           &= a_{ij}C_{1j} + a_{2j}C_{2j} + \cdots + a_{nj}C_{nj}
+  \end{aligned}
+\]
+where the first expression represents the expansion across row $i$ 
+and the second expression represents the expansion across row $j$
+\subsubsection{Example Problem}
+Compute $det(\begin{bmatrix}1 & 2 & 0 \\ 3 & -1 & 2 \\ 2 & 0 & 1 
+\end{bmatrix})$ by cofactor expansion across row 1 
+\begin{enumerate}
+  \item Calculate $C_{11} \rightarrow C_{11} = 1$. Take determinant 
+    of $2 \times 2$ matrix for the $A_{11}$ cofactor 
+    \[
+      C_{11} \cdot A_{11} = 1 \cdot \begin{bmatrix}
+        -1 & 2 \\
+        0 & 1 
+      \end{bmatrix}
+    \]
+    $1 \cdot det(A_{11}) = 1 \cdot (-1(1) - 2(0)) = -1$
+  \item Subtract the determinant of $A_{12}$ \cdot $C_{12} \rightarrow 
+    C_{12} = 2$
+    \[
+      C_{12} \cdot A_{12} = 2 \cdot \begin{bmatrix}
+        3 & 2 \\
+        2 & 1 
+      \end{bmatrix}
+    \]
+    $2 \cdot det(A_{12}) = 2 \cdot (3(1) - 2(2)) = -2$
+  \item Add the determinant of $A_{13}$ \cdot $C_{13} \rightarrow 
+    C_{13} = 0$ 
+\[
+    C_{11} \cdot det(A_{11}) - C_{12} \cdot det(A_{12}) 
+    + C_{13} \cdot det(A_{13}) = -1 + 2 = -1
+\]
+\end{enumerate}
+This same process can be done for column expansion by using the 
+same formula. To compute $det(A)$ using cofactor expansion down 
+column $2$ 
+\[
+  det(A) = -C_{12} \cdot det(A_{12}) + C_{22} \cdot det(A_{22}) 
+  + C_{32} \cdot det(A_{32}) 
+\]
+\[
+  -2(-1) + (-1)(1) - 0 = 1
+\]
+Note that the cofactor expansion would not work for a large $n$ square 
+matrix. To compute the determinant of a large $n \times n$ matrix, 
+\begin{enumerate}
+  \item one reduces to $n$ determinants of size 
+    $(n - 1) \times (n - 1)$
+  \item then $n(n - 1)$ determinants of size 
+    $(n - 2) \times (n - 2)$
+\end{enumerate}
+\section{Eigenvectors and Eigenvalues}
+\textbf{Eigenvector} - A nonzero $v$, such that $Av = \lambda v$ for 
+$n \times n$ matrix $A$ \\\\
+\textbf{Eigenvalue} - The $\lambda$ scalar that is associated with
+the eigenvector $v$
+\subsection{Verifying Eigenvectors}
+1. Show that $\begin{bmatrix}1 \\ 1 \end{bmatrix}$ an eigenvector of $A = 
+  \begin{bmatrix} 0 & -3 \\ -2 & -1 \end{bmatrix}$. Is $\begin{bmatrix}
+0 \\ 1 \end{bmatrix}$ an eigenvector? 
+\[
+  A\begin{bmatrix} 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 & -2 
+  \\ -4 & 2 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = 
+  \begin{bmatrix} -2 \\ -2 \end{bmatrix} = -2 \begin{bmatrix} 1 
+\\ 1 \end{bmatrix}
+\]
+Therefore, $\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ is an eigenvector of 
+$A$ with eigenvalue, $\lambda$, $-2$ 
+\[
+  A\begin{bmatrix} 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 & -2 \\
+  -4 & 2 \end{bmatrix} \begin{bmatrix} 0 \\ 1 \end{bmatrix} = 
+  \begin{bmatrix} -2 \\ 2 \end{bmatrix} \neq \lambda \begin{bmatrix}
+0 \\ 1 \end{bmatrix}
+\]
+No! $\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ is not an eigenvector of 
+$A$ because it does not have an appropriate eigenvalue, $\lambda$, 
+associated with it.
+\subsection{Finding Eigenvectors}
+1. Find the eigenvectors and eigenvalues of $A = \begin{bmatrix} 
+0 & 1 \\ 1 & 0 \end{bmatrix}$ 
+\[
+  \begin{aligned}
+  \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} x \\ y 
+  \end{bmatrix} &= \begin{bmatrix} y \\ x \end{bmatrix} \\
+  A \begin{bmatrix} 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 1 
+  \end{bmatrix} &= 1 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+  \end{aligned}
+\]
+$\begin{bmatrix} 1 \\ 1 \end{bmatrix}$ is one eigenvector with 
+eigenvalue, $\lambda$, $1$ 
+\[
+  A \begin{bmatrix} -1 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ -1 
+  \end{bmatrix} = -1 \cdot \begin{bmatrix} -1 \\ 1 \end{bmatrix}
+\]
+$\begin{bmatrix} -1 \\ 1 \end{bmatrix}$ is another eigenvector with 
+eigenvalue, $\lambda$, $-1$ \\\\
+2. For $B = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$, find the 
+eigenvectors and eigenvalues 
+\[
+  B\begin{bmatrix}1 \\ 0 \end{bmatrix} = \begin{bmatrix}1 \\ 0 
+  \end{bmatrix} = 1 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+\]
+$\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ is an eigenvector with 
+$\lambda = 1$
+\[
+  B\begin{bmatrix}0 \\ 1\end{bmatrix} = \begin{bmatrix}0 \\ 0 
+  \end{bmatrix} = 0 \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+\]
+$\begin{bmatrix} 0 \\ 1 \end{bmatrix}$ is an eigenvector with 
+$\lambda = 0$
+\subsection{Eigenspaces}
+Let $\lambda$ be an eigenvalue of $m \times n$ matrix $A$. The 
+\textbf{eigenspace} of $A$ associated with $\lambda$ is the set of 
+eigenvectors of $A$ with eigenvalue $\lambda$ and the zero vector, 
+where
+\[
+  \text{Eig}_\lambda(A) = \{v : Av = \lambda v\}
+\]
+\section{Computing Eigenvalues and Eigenvectors}
+If $A$ is an $n \times n$ matrix and $\lambda$ be a scalar, then 
+$\lambda$ is an eigenvalue of $A$ if and only if 
+$det(A - \lambda I) = 0$ \\\\
+If $A$ be an $n \times n$ matrix, then $p_A(t) = det(A - tl)$ is a 
+polynomial of degree $n$. Thus $A$ has at most $n$ eigenvalues, where 
+$p_A(t)$ the \textbf{characteristic polynomial} of $A$.
+\subsection{Examples}
+Let $A = \begin{bmatrix} 3 & 1 \\ 1 & 3 
+\end{bmatrix}$ \\\\
+Compute the eigenvalues of $A$
+\[
+  A = \lambda I = \begin{bmatrix} 3 & 1 \\ 1 & 3 \end{bmatrix} 
+  - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = 
+  det(\begin{bmatrix} 3 - \lambda & 1 \\ 1 & 3 - 
+  \lambda \end{bmatrix}) = (3 - \lambda)^2 - 1 
+\]
+\[
+  \begin{aligned}
+    &= \lambda^2 - 6\lambda + 8 = 0
+    &= (\lambda - 4)(\lambda - 2) = 0
+  \end{aligned}
+\] where $\lambda = 4, \lambda = 2$ are eigenvalues for $A$. Therefore, 
+\[
+  Eig_\lambda = Nul(A - \lambda I)
+\]
+2. What are the eigenspaces of $A$? \\\\
+Let $\lambda_1 = 2$
+\[
+  A - 2I = \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} \rightarrow 
+  \text{ RREF } = \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}
+\]
+\[
+  x = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix}
+  -x_2 \\ x_2 \end{bmatrix} = x_2 \begin{bmatrix} -1 \\ 1 \end{bmatrix}
+  \rightarrow Nul(A - 2I) = span(\begin{bmatrix} -1 \\ 1 \end{bmatrix})
+\]
+Let $\lambda_2 = 4$
+\[
+  A - 4I = \begin{bmatrix} -1 & 1 \\ 1 & -1 \end{bmatrix} \rightarrow 
+  \text{ RREF } \begin{bmatrix} 1 & -1 \\ 0 & 0 \end{bmatrix}
+\]
+\[
+  x = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix}
+  x_2 \\ x_2 \end{bmatrix} = x_2 \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+  \rightarrow Nul(A - 4I) = span(\begin{bmatrix} 1 \\ 1 \end{bmatrix})
+\]
+  3. Find the eigenvalues and eigenspaces of $A = \begin{bmatrix} 3 & 2 
+  & 3 \\ 0 & 6 & 10 \\ 0 & 0 & 2 \end{bmatrix}$. \\\\ 
+  Notice that this matrix is in row echelon form. Therefore,  
+\[
+  det(A - \lambda I) = \begin{bmatrix} 3 - \lambda & 2 & 3 \\ 
+  0 & 6 - \lambda & 10 \\ 0 & 0 & 2 - \lambda \end{bmatrix} = 
+  (3 - \lambda)(6 - \lambda)(2 - \lambda)
+\]
+Therefore, $\lambda = 2, 3, 6$. The eigenvalues of a triangular 
+matrix are its diagonal entries. 
+\[
+  \lambda = 2 \rightarrow A - 2I = \begin{bmatrix} 1 & 2 & 3 \\
+  0 & 4 & 10 \\ 0 & 0 & 0 \end{bmatrix} \rightarrow 
+    \begin{bmatrix} 1 & 0 & -2 \\ 0 & 1 & 2.5 \\ 0 & 0 & 0 
+      \end{bmatrix} \rightarrow Nul(A - 2I) = span(\begin{bmatrix}
+    2 \\ -\frac{5}{2} \\ 1 \end{bmatrix})
+\]
+\[
+  \lambda = 3 \rightarrow A - 3I = \begin{bmatrix} 0 & 2 & 3 \\
+  0 & 3 & 10 \\ 0 & 0 & -1 \end{bmatrix} \rightarrow 
+  \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{bmatrix}
+  \rightarrow Nul(A - 3I) = span(\begin{bmatrix} 1 \\ 0 \\ 0 
+  \end{bmatrix})
+\]
+\[
+  \lambda = 6 \rightarrow A - 6I = \begin{bmatrix} -3 & 2 & 3 \\ 
+  0 & 0 & 10 \\ 0 & 0 & -4 \end{bmatrix} \rightarrow 
+    \begin{bmatrix} 1 & -\frac{2}{3} & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 
+      \end{bmatrix} \rightarrow Nul(A - 6I) = span(\begin{bmatrix} 
+    \frac{2}{3} \\ 1 \\ 0 \end{bmatrix})
+\]
+\section{Properties of Eigenvectors and Eigenvalues}
+Suppose $A$ is an $n \times n$ matrix, where $\lambda$ is an 
+eigenvalue of $A$ 
+\begin{itemize}
+  \item The \textbf{algebraic multiplicity} of $\lambda$ is its 
+    multiplicity as a root of the characteristic polynomial, 
+    which is the largest integer $k$ such that $(t - \lambda)^k$ 
+    divides $p_A(t)$
+  \item The \textbf{geometric multiplicity} of $\lambda$ is the 
+    dimension of the eigenspace $Eig_\lambda(A)$ of $\lambda$ 
+\end{itemize}
+\subsection{Example Problem}
+1. Find the eigenvalues of $A = \begin{bmatrix} 1 & 1 \\ 
+0 & 1 \end{bmatrix}$ and determine their 
+algebraic and geometric multiplicities
+\[
+  det(A - \lambda I) = det(\begin{bmatrix} 1 - \lambda & 1 \\ 
+  0 & 1 - \lambda \end{bmatrix}) = (1 - \lambda)^2
+\]
+Therefore, $\lambda = 1$ is the only eigenvalue, which has an 
+algebraic multiplicity of $2$ 
+\[
+  \lambda = 1: A - I = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}
+  \rightarrow Nul(A - I) = span(\begin{bmatrix} 1 \\ 0 \end{bmatrix})
+\]
+Therefore, there is only a dimension of $1$ because the geometric 
+multiplicity is $1$
+\subsubsection{Connecting Eigenvectors to Linear Independence}
+Eigenvectors $v_1, \dots, v_m$ with different corresponding eigenvalues 
+of an $n \times n$ matrix $A$ are linearly 
+independent
+\subsection{Trace}
+\textbf{Trace} - the sum of the diagonal entries of matrix $A$, given 
+  that \[A = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots 
+           & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{nn} \end{bmatrix}\]
+Mathematically speaking,
+\[
+  Tr(A) = a_{11} + a_{22} + \cdots + a_{nn}
+\]
+\subsubsection{Trace vs Determinant}
+Thet trace is the \textbf{sum} of the eigenvalues, $\lambda_1, \lambda_2 + \cdots + \lambda_n$, while the determinant is the \textbf{product}
+of the eigenvalues $\lambda_1 \cdot \lambda_2 \cdots \lambda_n$ \\\\
+Mathematically speaking, 
+\[
+  Tr(A) = a_{11} + a_{22} + \cdots + a_{nn}
+\]
+\[
+  det(A) = \lambda_1 \cdot \lambda_2 \cdots \lambda_n
+\]
+\subsubsection{Deriving the characteristic polynomial via the 
+trace and determinant}
+The characteristic polynomial of $A \rightarrow det(A - \lambda I)$, 
+which is also notated as $p(\lambda)$ is equivalent to
+\[
+  p(\lambda) = \lambda^2 - Tr(A)\lambda + det(A)
+\]
+\section{Markov Matrices}
+\textbf{Markov Matrices} or \textbf{stochastic matrices} are square matrices that have only non-negative entries, where the entries in each columnadd up to $1$ \\\\
+\textbf{Probability Vectors} - also known as stochastic vectors and 
+exist in $\mathbb{R}^n$ that have only non negative entries, which add up to 1 
+\subsection{Markov Matrices Examples}
+\[
+  \begin{bmatrix} .1 & .5 \\ .9 & .5 \end{bmatrix}, 
+  \begin{bmatrix} 0 & .25 & .4 \\ 1 & .25 & .2 \\ 
+    0 & .5 & .4 \end{bmatrix}, \begin{bmatrix} .1 \\ 
+  .25 \\ .05 \\ .5 \\ .1 \end{bmatrix}
+\]
+Note that a scalar constant multiplied by a vector can result 
+in a probability vector. For example, 
+\[
+  \frac{1}{10} \begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}
+\]
+results in a probability vector, while $\begin{bmatrix} 1 \\ 2 \\ 3 
+\\ 4 \end{bmatrix}$ does not \\\\
+Suppose $A$ is a Markov matrix and $v \in \mathbb{R}^n$ is a probability vector. Their product is also a probability vector! 
+\subsection{Connecting markov matrices and probability vectors to 
+eigenvalues}
+When $A$ is a Markov matrix,
+\begin{itemize}
+  \item $1$ is an eigenvalue of $A$ and every other eigenvalue 
+    $\lambda$ of $A$ satisfies $|\lambda| \leq 1$ 
+  \item If $A$ has only positive entries, then any other eigenvalue 
+    satisfies $|\lambda| < 1$ 
+\end{itemize}
+A \textbf{stationary} probability vector of a Markov matrix is a 
+probability vector $v$ that is an eigenvector of $A$ corresponding 
+to the eigenvalue $1$ 
+Suppose $A$ is an $n \times n$ Markov matrix with only positive entries and $z \in \mathbb{R}^n$ be a probability vector. Then 
+\[
+  \lim_{k \rightarrow \infty} A^k z 
+\]
+exists and $z_\infty$ is a stationary probability vector of $A$, 
+where $Az_\infty = z_\infty$ 
+\subsection{Markov Matrices example}
+Consider a fixed population of people with or without a job. Suppose 
+each year, $\frac{1}{2}$ of those unemployed find a job, while 
+$\frac{1}{10}$ of those employed lose their job. What is the 
+unemployment rate in the long term equilibrium? \\\\
+Let $x_t$ be the percentage of population employed at time $t$ and
+let $y_t$ be the percentage of population unemployed at time $t$, 
+where 
+\[
+  \begin{bmatrix} x_t + 1 \\ y_t + 1 \end{bmatrix} = \begin{bmatrix}
+  .9x_t + .5y_t \\ .1x_t + .5y_t \end{bmatrix} = \begin{bmatrix}
+  .9 & .5 \\ .1 & .5 \end{bmatrix} \begin{bmatrix} x_t \\ y_t \end{bmatrix}
+\]
+Let $\begin{bmatrix} x_\infty \\ y_\infty \end{bmatrix}$ be the 
+stationary probability vector, where 
+\[
+  \begin{bmatrix} x_\infty \\ y_\infty \end{bmatrix} = 
+  \begin{bmatrix} .9 & .5 \\ .1 & .5 \end{bmatrix} 
+  \begin{bmatrix} x_\infty \\ y_\infty \end{bmatrix}
+\]
+Determine $A - I$, 
+\[
+  A - I = \begin{bmatrix} -0.1 & 0.5 \\ 0.1 & -0.5 \end{bmatrix}
+  \rightarrow \begin{bmatrix} 1 & -5 \\ 0 & 0 \end{bmatrix}
+  \rightarrow Nul(A - I) = span(\begin{bmatrix} 5 \\ 1 \end{bmatrix})
+\]
+Since $x_\infty + y_\infty = 1 \rightarrow \begin{bmatrix} x_\infty \\
+  y_\infty \end{bmatrix} = \begin{bmatrix} 5/6 \\ 1/6 \end{bmatrix}$ \\\\
+  Therefore, $\frac{1}{6}$ is the umemployment rate in the long term equilibrium. 
+\section{Diagonlization}
+A square matrix $A$ is diagonalizable if there is an invertible matrix 
+$P$ and a diagonal matrix $D$, where $A = PDP^{-1}$ \\\\
+Suppose $A$ is an $n \times n$ matrix that has $n$ linearly independent 
+eigenvectors $v_1, v_2, \dots, v_n$ with associated eigenvalues 
+$\lambda_1, \dots, \lambda_n$. Then $A$ is diagonalizable as 
+$PDP^{-1}$, where 
+\[
+  P = \begin{bmatrix} v_1 & \dots & v_n \end{bmatrix} \text{ and }
+  D = \begin{bmatrix} \lambda_1 & & \\ & \ddots & \\ 
+  & & \lambda_n \end{bmatrix} 
+\]
+\subsection{Diagonalization Problem}
+Diagonalize $A = \begin{bmatrix} 6 & -1 \\ 2 & 3 \end{bmatrix}$
+\[
+  det(A - \lambda I) = det(\begin{bmatrix} 
+  6 - \lambda & -1 \\ 2 & 3 - \lambda \end{bmatrix}) = (6 - \lambda)(3 - \lambda)
+  + 2 = \lambda^2 - 9\lambda + 20 = (\lambda - 4)(\lambda - 5)
+\]
+where $\lambda_1 = 4$ and $\lambda_2 = 5$ 
+\[
+  \lambda_1 = 4 \rightarrow A - 4I = \begin{bmatrix} 2 & -1 \\ 
+    2 & -1 \end{bmatrix} \rightarrow \begin{bmatrix} 1 & -\frac{1}{2}
+    \\ 0 & 0 \end{bmatrix} \rightarrow Nul(A - 4I) = 
+    span(\begin{bmatrix} \frac{1}{2} \\ 1 \end{bmatrix})
+\]
+\[
+  \lambda_2 = 5 \rightarrow A - 5I = \begin{bmatrix} 1 & -1 \\ 
+    2 & -2 \end{bmatrix} \rightarrow \begin{bmatrix} 1 & -1 \\
+    0 & 0 \end{bmatrix} \rightarrow Nul(A - 5I) = span(\begin{bmatrix}
+  1 \\ 1 \end{bmatrix})
+\]
+Therefore, 
+\[
+  D = \begin{bmatrix} 4 & 0 \\ 0 & 5 \end{bmatrix}, 
+  P = \begin{bmatrix} \frac{1}{2} & 1 \\ 1 & 1 \end{bmatrix}
+\]
+where $A = PDP^{-1}$
+\subsection{Eigenbases and Change of Eigenbasis}
+Vectors $v_1, \dots, v_n$ form an \textbf{eigenbasis} of $n \times n$ matrix $A$, if $v_1, \dots, v_n$ form a basis of $\mathbb{R}^n$ and $v_1, \dots, 
+v_n$ are all eigenvectors of $A$ \\\\ 
+Therefore, 
+\begin{itemize}
+  \item A has an eigenbasis 
+  \item A is diagonalizable 
+  \item The geometric multiplicities of all eigenvalues of $A$ 
+    sum up to $n$ 
+\end{itemize}
+There also exists a diagonal matrix $D$, such that $A = I_{\epsilon_n, 
+\beta}DI_{\beta, \epsilon_n}$ for $n \times n$ matrix $A$ and 
+eigenbasis $\beta = (v_1, \dots, v_n)$ for $A$ \\\\
+Therefore, Diagonalization is the \textbf{change of basis} to the eigenbasis!
+\section{Powers of Matrices}
+1. Suppose $A$ has an eigenbasis, which allow $A$ to raise to large 
+powers easily! If $A = PDP^{-1}$, where $D$ is a diagonal matrix, 
+then for any $m$, $A^m = PD^mP^{-1}$. This makes it easy to find 
+$D^m$ 
+\[
+  D^m = \begin{bmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n 
+    \end{bmatrix}^m = \begin{bmatrix} (\lambda_1)^m & & \\ 
+                                                    & \ddots & \\
+                                                    & & (\lambda_n)^m
+    \end{bmatrix}
+\]
+\subsection{Examples}
+1. What is $A^{100}$, given that $A = \begin{bmatrix} \frac{1}{2} & 
+0 & 0 \\ -\frac{1}{2} & 1 & 6 \\ 0 & 0 & 2 \end{bmatrix}$ with 
+eigenvectors 
+\[
+  v_1 = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \text{ with }
+  \lambda_1 = \frac{1}{2}, v_2 = \begin{bmatrix} 0 \\ 1 \\ 0 
+  \end{bmatrix} \text{ with } \lambda_2 = 1, v_3 = \begin{bmatrix}
+  0 \\ 6 \\ 1 \end{bmatrix} \text{ with } \lambda_3 = 2
+\] 
+Recall that $P$ forms from the eigenvectors, $D$ is a diagonal matrix that 
+forms from the eigenvalues of the eigenvectors, and $P^{-1}$ 
+is the inverse matrix of $P$
+\[
+  P = \begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 6 \\ 0 & 0 & 1 
+    \end{bmatrix}, D = \begin{bmatrix} \frac{1}{2} & 0 & 0 \\ 
+  0 & 1 & 0 \\ 0 & 0 & 2 \end{bmatrix},
+    P^{-1} = \begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 6 \\ 0 & 0 & 1 \end{bmatrix}^{-1} = \begin{bmatrix} 1 & 0 & 0 \\ -1 & 1 & -6 \\ 
+  0 & 0 & 1 \end{bmatrix}
+\]
+Therefore,
+\[
+  A^{100} = \begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 6 \\ 0 & 0 & 1 
+  \end{bmatrix} \begin{bmatrix} \frac{1}{2}^{100} & 0 & 0 \\ 
+  0 & 1^{100} & 0 \\ 0 & 0 & 2^{100} \end{bmatrix} \begin{bmatrix}
+  1 & 0 & 0 \\ -1 & 1 & -6 \\ 0 & 0 & 1 \end{bmatrix} = 
+    \begin{bmatrix} \frac{1}{2^{100}} & 0 & 0 \\ 
+      (\frac{1}{2^{100}} - 1) & 1 & (6 \cdot 2^{100} - 6) \\
+    0 & 0 & 2^{100} \end{bmatrix}
+\]
+2. Let $A$ be a $2 \times 2$ matrix where $\begin{bmatrix} 1 \\ 1 
+\end{bmatrix}$ is an eigenvector with eigenvalue $\frac{1}{2}$ and  
+$\begin{bmatrix} 1 \\ 0 \end{bmatrix}$ is an eigenvector with 
+eigenvalue $1$. Let $v = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$. 
+Graphically determine how $A^{n}v$ behaves as $n \rightarrow \infty$ \\\\Recall that an eigenbasis forms when its eigenvectors are \textbf{linearly independent}. \\\\ 
+Since $v = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$ is a linear combination 
+resulting from both eigenvectors, this means that the eigenvectors 
+form an eigenbasis. \\\\
+Recall that in an eigenvector, 
+$A^n v = \lambda^n v$, 
+which means that the eigenvalues can be substituted for $A$ where 
+\[
+  \lim_{n \rightarrow \infty} A^n v = \lim_{n \rightarrow \infty}
+  \lambda^n v 
+\]
+Therefore,
+\[
+  \lim_{n \rightarrow \infty} \frac{1}{2}^n \begin{bmatrix} 1 \\ 1 
+    \end{bmatrix} + \lim_{n \rightarrow \infty} 1^n \begin{bmatrix} 1 
+    \\ 0 \end{bmatrix} = 0 \cdot \begin{bmatrix} 1 \\ 1 \end{bmatrix} 
+    + 1 \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} = 
+    \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+\]
+\section{Matrix Exponential}
+For $n \times n$ matrix $A$, the \textbf{matrix exponential}
+$e^{At}$ is defined as 
+\[
+  e^{At} = I + At + \frac{(At)^2}{2!} + \frac{(At)^3}{3!} + \cdots
+\]
+\subsection{Calculating Matrix Exponential}
+1. Compute $e^{At}$ for $A = \begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix}$
+\[
+  At = \begin{bmatrix} 2t & 0 \\ 0 & t \end{bmatrix}
+\]
+where 
+\[
+  (At)^k = \begin{bmatrix} (2t)^k & 0 \\ 0 & t^k \end{bmatrix}
+\] and 
+\[
+  e^{At} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} + 
+  \begin{bmatrix} 2t & 0 \\ 0 & 1t \end{bmatrix} + 
+  \frac{1}{2!} \begin{bmatrix} (2t)^2 & 0 \\ 0 & t^2 
+    \end{bmatrix} + \dots = \begin{bmatrix} e^2t & 0 \\ 
+  0 & e^t \end{bmatrix}
+\]
+\subsection{$e^{At}$ definitions}
+Let $A$ be an $n \times n$ matrix 
+\begin{itemize}
+  \item The series in the definition of $e^{At}$ always converges 
+  \item $e^{At}e^{As} = e^{A(t + s)}$ 
+  \item $e^{At}e^{-At} = I_n$
+  \item $\frac{d}{dt}(e^{At}) = Ae^{At}$
+\end{itemize}
+\subsection{Connecting Diagonalization with $e^{At}$}
+For $n \times n$ matrix $A$, such that $A = PDP^{-1}$ for 
+some invertible matrix $P$ and some diagonal matrix $D$. Then 
+\[
+  e^{At} = Pe^{Dt}P^{-1}
+\]
+\subsubsection{Example}
+1. Suppose $A = \begin{bmatrix} -2 & 1 \\ 1 & -2 \end{bmatrix} = 
+\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \begin{bmatrix}
+-1 & 0 \\ 0 & -3 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & -1 
+\end{bmatrix}^{-1}$. Compute $e^{At}$
+\[
+  \begin{aligned}
+    e^{At} &= Pe^{Dt}P^{-1} \\   
+           &= \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} 
+    \begin{bmatrix} e^{-t} & 0 \\ 0 & e^{-3t} \end{bmatrix} 
+    \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}^{-1} \\
+  &= \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} 
+  \begin{bmatrix}e^{-t} & 0 \\ 0 & e^{-3t} \end{bmatrix} 
+  \begin{bmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} 
+    & -\frac{1}{2} \end{bmatrix} \\
+  &= \begin{bmatrix} e^{-t} & e^{-3t} \\ e^{-t} & -e^{-3t} 
+    \end{bmatrix} \begin{bmatrix} \frac{1}{2} & \frac{1}{2}
+  \\ \frac{1}{2} & -\frac{1}{2} \end{bmatrix} \\
+                   &= \begin{bmatrix} \frac{1}{2}e^{-t} 
+                     + \frac{1}{2}e^{-3t} & \frac{1}{2}e^{-t} 
+                     - \frac{1}{2}e^{-3t} \\ 
+                      \frac{1}{2}e^{-t} 
+                     - \frac{1}{2}e^{-3t} & \frac{1}{2}e^{-t} 
+                   + \frac{1}{2}e^{-3t} \end{bmatrix}
+      \end{aligned}
+\]
+\section{Orthogonal Projections onto lines}
+Let $v, w \in \mathbb{R}^n$. The \textbf{orthogonal projection} of $v$ 
+onto the line spanned by $w$ is 
+\[
+  proj_w(v) = \frac{w \cdot v}{w \cdot w}w 
+\]
+Suppose $v, w \in \mathbb{R}^n$. Then $proj_w(v)$ is the point in 
+span(w) closest to $v$; that is 
+\[
+  dist(v, proj_w(v)) = min(u \in span(w)) dist(v, u)
+\]
+$v - proj_w(v)$ is known as the error term and it is in $span(w)^\perp$ 
+\[
+  \begin{aligned}
+    v &= proj_w(v) + v - proj_w(v) \\
+      &= \in span(w) + \in span(w)^\perp
+  \end{aligned}
+\]
+Suppose $w \in \mathbb{R}^n$. Then for all $v \in \mathbb{R}^n$ 
+\[
+  proj_w(v) = (\frac{1}{w \cdot w}ww^T)v
+\]
+\subsection{Example Problem}
+Suppose $w = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$. What is the 
+orthogonal projection matrix $P$ onto $span(w)$. Use it to calculate 
+the projections of $\begin{bmatrix} 1 \\ 0 \end{bmatrix}, 
+\begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 
+  \end{bmatrix}$ onto $span(w)$
+\[
+  P = \frac{1}{w \cdot w}ww^T = \frac{1}{2} \begin{bmatrix} 1 \\ 1 
+    \end{bmatrix} \begin{bmatrix} 1 & 1 \end{bmatrix} = 
+    \frac{1}{2} \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix}
+\]
+\begin{itemize}
+  \item If $v = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$, then 
+    $proj_w(v) = Pv = \frac{1}{2} \begin{bmatrix} 1 & 1 \\ 
+    1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 0 \end{bmatrix} 
+    = \frac{1}{2} \begin{bmatrix} 1 \\ 1 \end{bmatrix}$
+  \item If $v = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$, then 
+    $proj_w(v) = Pv = \frac{1}{2} \begin{bmatrix} 1 & 1 \\ 
+    1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} 
+    = \begin{bmatrix} 1 \\ 1 \end{bmatrix} = v$
+  \item If $v = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$, 
+    then $proj_w(v) = Pv = \frac{1}{2} \begin{bmatrix} 1 
+      & 1 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ -1 
+      \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$
+\end{itemize}
+\section{Orthogonal Projections onto subspaces}
+Let $W$ be a subspace of $\mathbb{R}^n$ and $v \in \mathbb{R}^n$. 
+Then each $v$ in $\mathbb{R}^n$ can be uniquely written as 
+\[
+  v = \hat{v} + v^\perp
+\]
+\hat{v} is the orthogonal projection of $v$ onto $W$, $proj_W(v)$ \\\\
+If $(w_1, \dots, w_m)$ is an orthogonal basis of $W$, then 
+\[
+  proj_W(v) = (\frac{v \cdot w_1}{w_1 \cdot w_1})w_1 + \dots 
+  + (\frac{v \cdot w_m}{w_m \cdot w_m})w_m
+\]
+\subsection{Example Problem}
+Let $W = span(\begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix}, 
+\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix})$ and $v = \begin{bmatrix}
+0 \\ 3 \\ 10 \end{bmatrix}$. Then $proj_w(v)$ 
+\[
+  proj_w(v) = \frac{v \cdot w_1}{w_1 \cdot w_1}w_1 + 
+  \frac{v \cdot w_2}{w_2 \cdot w_2}w_2  
+\]
+\[
+  \frac{\begin{bmatrix} 0 \\ 3 \\ 10 \end{bmatrix} \cdot 
+    \begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix}}{\begin{bmatrix} 3 \\ 0 \\ 1 
+  \end{bmatrix} \cdot \begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix}}
+  \begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix} + 
+  \frac{\begin{bmatrix} 0 \\ 3 \\ 10 \end{bmatrix} \cdot \begin{bmatrix}
+    0 \\ 1 \\ 0 \end{bmatrix}}{\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
+  \cdot \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}} \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix}3 \\ 0 \\ 1\end{bmatrix} + 
+  3 \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix}
+3 \\ 3 \\ 1 \end{bmatrix}
+  \]
+\[
+  v_\perp = \begin{bmatrix} 0 \\ 3 \\ 10 \end{bmatrix} - 
+  \begin{bmatrix} 3 \\ 3 \\ 1 \end{bmatrix} = \begin{bmatrix}
+-3 \\ 0 \\ 9 \end{bmatrix}
+\]
+\subsection{Linear transformations + Orthogonal Projections}
+The projection map $proj_w : \mathbb{R}^n \rightarrow \mathbb{R}^n$ 
+that sends $v$ to $proj_w(v)$ is linear, where the matrix $P_w$ 
+is the matrix $(proj_W)_{\epsilon_n, \epsilon_n}$ that represents 
+$proj_W$ with respect to the standard basis. $P_w$ is the \textbf{orthogonal projection matrix} onto $W$. 
+\subsubsection{Example Problems}
+1. Compute $P_W$ for $W = span(\begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix}, 
+\begin{bmatrix} 0 \\ 1\\ 0 \end{bmatrix})$
+\[
+  proj_W(\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}) = 
+  \frac{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \cdot 
+  \begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix}}{\begin{bmatrix} 
+3 \\ 0 \\ 1 \end{bmatrix} \cdot \begin{bmatrix} 
+3 \\ 0 \\ 1 \end{bmatrix}} \begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix} 
++ \frac{\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \cdot \begin{bmatrix}
+0 \\ 1 \\ 0 \end{bmatrix}}{\begin{bmatrix}
+0 \\ 1 \\ 0 \end{bmatrix} \cdot \begin{bmatrix}
+0 \\ 1 \\ 0 \end{bmatrix}} \begin{bmatrix}
+0 \\ 1 \\ 0 \end{bmatrix} = \frac{3}{10} \begin{bmatrix} 3 \\ 0 \\ 1 
+\end{bmatrix}
+\]
+\[
+  proj_W(\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}) = 
+  \frac{\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \cdot 
+  \begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix}}{10} \begin{bmatrix} 3 \\ 0 \\ 1 \end{bmatrix} 
++ \frac{\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \cdot \begin{bmatrix}
+0 \\ 1 \\ 0 \end{bmatrix}}{1} \begin{bmatrix}
+0 \\ 1 \\ 0 \end{bmatrix} = \frac{1}{10} \begin{bmatrix} 3 \\ 0 \\ 1 
+\end{bmatrix}
+\]
+\[
+  proj_w(\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}) = 
+  \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
+\]
+\[
+  P_W = \begin{bmatrix} \frac{9}{10} & 0 & \frac{3}{10} \\
+  0 & 1 & 0 \\ \frac{3}{10} & 0 & \frac{1}{10} \end{bmatrix}
+\]
+2. Let $P_W$ be the orthogonal projection matrix $W$ in $\mathbb{R}^n$ 
+and let $v \in \mathbb{R}^n$. 
+\begin{itemize}
+  \item If $P_Wv = v$, what can you say about $v$? 
+  \item If $P_Wv = 0$, what can you say about $v$?
+\end{itemize}
+Suppose $v = w + u$, where $w \in W$ and $u \in W^\perp$. Then 
+$w = P_Wv$. Therefore, if $P_Wv = v$, then $w = v$, meaning that 
+$v \in W$ and if $P_Wv = 0$, then $z = v$ and thus $v \in W^\perp$. 
+3. What is the orthogonal projection matrix $P_W^\perp$ for 
+projecting onto $W^\perp$? \\\\
+Let $v \in \mathbb{R}^n$. To show that Qv is the projection of $v$ 
+onto $W^\perp$, we need to check that $Qv \in W^\perp$ and $v - Qv 
+\in (W^\perp)^\perp$ \\\\
+Since $P_Wv$ is the projection matrix of $v$ onto $W$. $Qv = v - 
+P_Wv \in W^\perp$. Since $v - Qv = P_Wv$, $v - Qv \in W$, where
+$W = (W^\perp)^\perp$
+\section{Least Squares Solutions}
+Suppose $Ax = b$ is inconsistent, where there is no exact solution 
+because $b$ is not in the column space of $A$. Instead, the goal 
+is to look for an $x$ that minimizes this error, known as the 
+\textbf{least squares solution}. \\\\ 
+The \textbf{least squares solution} (or LSQ solution) of a system 
+$Ax = b$ is a vector $\hat{x} \in \mathbb{R}^n$ such that 
+\[
+  dist(A\hat{x}, b)) = min(x \in \mathbb{R}^n) dist(Ax, b)
+\]
+Suppose $A$ is an $m \times n$ matrix and $b \in \mathbb{R}^m$. Then 
+$\hat{x}$ is an LSQ solution to $Ax = b$ if and only if $A\hat{x} 
+= proj_{Col(A)}(b)$
+\subsection{Example Problems}
+1. Let $A = \begin{bmatrix} 1 & 1 \\ -1 & 1 \\ 0 & 0 \end{bmatrix}$ 
+and $b = \begin{bmatrix} 2 \\ 1 \\ 1 \end{bmatrix}$. What is the 
+LSQ solution of $Ax = b$. \\\\\\
+Determine $\hat{b}$ by figuring out the projection of $b$ onto the 
+column space of $A$. \\\\
+Recall that the least squares solution, $\hat{x}$, gives the 
+best fitting linear combination of $A$ in order to determine 
+$\hat{b}$, which approximates $b$. \\\\ 
+To find this best fitting linear combination of $A$, 
+we msut use the basis of the column space because that is what contains 
+the minimal set of vectors that are unique and linearly 
+independent in $A$
+\[
+  \hat{b} = proj_{Col(A)}(b) = \frac{\begin{bmatrix} 2 \\ 1 \\ 1 
+      \end{bmatrix} \cdot \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}
+    }{\begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}}\begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} + 
+    \frac{\begin{bmatrix} 2 \\ 1 \\ 1 \end{bmatrix} \cdot 
+    \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}}{\begin{bmatrix} 1 \\ 1 
+  \\ 0 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}} \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} = \frac{1}{2} \begin{bmatrix}
+  1 \\ -1 \\ 0 \end{bmatrix} + \frac{3}{2} \begin{bmatrix} 1 \\ 1 \\ 0 
+  \end{bmatrix} = \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}
+\]
+Then, solve for $A\hat{x} = \hat{b}$ 
+\[
+  \begin{bmatrix} 1 & 1 \\ -1 & 1 \\ 0 & 0 \end{bmatrix}
+\begin{bmatrix} \hat{x}_1 \\ \hat{x}_2 \end{bmatrix}
+  = \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}
+\]
+The solution to this matrix system was defined when computing $\hat{b}$ 
+, where $\hat{x} = \begin{bmatrix} \frac{1}{2} \\\\ \frac{3}{2} 
+\end{bmatrix}$. This is because the projection $\hat{b} = A \hat{x}$ 
+calculates the unique coefficients needed to express $\hat{b}$ as 
+a linear combination of the columns of $A$. \\\\
+\subsection{Normal Equations for Least Squares}
+\begin{enumerate}
+  \item $\hat{x}$ is an LSQ solution to $Ax = b$ if and only if $A^TA\hat{x} = 
+A^Tb$ 
+  \item $proj_{Col(A)}(b) = A(A^TA)^{-1}A^Tb$ for $m \times n$ matrix 
+$A$ with linearly independent columns where $b \in \mathbb{R}^m$ 
+\end{enumerate}
+\subsubsection{More Examples}
+1. Let $A = \begin{bmatrix} 4 & 0 \\ 0 & 2 \\ 1 & 1 \end{bmatrix}$ 
+and $b = \begin{bmatrix} 2 \\ 0 \\ 11 \end{bmatrix}$. Find a LSQ 
+solution of $Ax = b$. 
+\[
+  A^TA = \begin{bmatrix} 4 & 0 & 1 \\ 0 & 2 & 1 \end{bmatrix} 
+  \begin{bmatrix} 4 & 0 \\ 0 & 2 \\ 1 & 1 \end{bmatrix} = 
+  \begin{bmatrix} 17 & 1 \\ 1 & 5 \end{bmatrix}
+\]
+\[
+  \begin{bmatrix} 4 & 0 & 1 \\ 0 & 2 & 1 \end{bmatrix} \begin{bmatrix}
+  2 \\ 0 \\ 11 \end{bmatrix} = \begin{bmatrix} 19 \\ 11 \end{bmatrix}
+\]
+The normal equations $A^TA\hat{x} = A^Tb$ are $\begin{bmatrix} 17 & 1
+  \\ 1 & 5 \end{bmatrix} \hat{x} = \begin{bmatrix} 19 \\ 11 
+\end{bmatrix}$, where
+\[
+  \begin{cases}
+    17x + y = 19 \\ 
+    x + 5y = 11 
+  \end{cases}
+\] where $x = 1$ and $y = 2$ and $\hat{x} = \begin{bmatrix} 1 \\ 2 
+\end{bmatrix}$ \\\\
+The projection of $b$ onto $Col(A)$ is $A\hat{x} = \begin{bmatrix}
+  4 & 0 \\ 0 & 2 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 2 
+  \end{bmatrix} = \begin{bmatrix} 4 \\ 4 \\ 3 \end{bmatrix}$
+\section{Linear Regression}
+Recall that \textbf{linear regression} is a technique used to 
+model the relationship between a dependent variable and one or more 
+independent variables by fitting a straight line to the given data. \\\\
+Linear Regression essentially finds the best fitting line through a 
+scatterplot of points, which is ultimately the line that minimizese 
+the total squared vertical distance between the observed data points 
+and the line itself, where 
+\[
+  y_i \approx \beta_0 + \beta_1x_i
+\]
+Or in matrix form, 
+\[
+  \begin{bmatrix} 1 & x_1 \\ 1 & x_2 \\ 1 & x_3 \\ 1 & x_4 
+    \end{bmatrix} \begin{bmatrix} \beta_1 \\ \beta_2 \end{bmatrix}
+    = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \end{bmatrix}
+\]
+The system is inconsistent, when the echelon form's system does not 
+contain a clear solution
+\subsection{Example}
+Find $\beta_1, \beta_2$ such that the line $y = \beta_1 + \beta_2x$ 
+best fits the data 
+\[
+  \begin{aligned}
+    (x_1, y_1) &= (2, 1), (x_2, y_2) = (5, 2)
+    (x_3, y_3) &= (7, 3), (x_4, y_4) = (8, 3)
+  \end{aligned}
+\]
+Setup a linear regression formula in matrix form and find its LSQ
+\[
+  \begin{bmatrix} 1 & 2 \\ 1 & 5 \\ 1 & 7 \\ 1 & 8 \end{bmatrix}
+  \begin{bmatrix} \beta_1 \\ \beta_2 \end{bmatrix} = 
+  \begin{bmatrix} 1 \\ 2 \\ 3 \\ 3 \end{bmatrix}
+\]
+where $X^TX\hat{x} = X^Ty$
+\[
+  \begin{bmatrix} 1 & 1 & 1 & 1 \\ 2 & 5 & 7 & 8 \end{bmatrix}
+  \begin{bmatrix} 1 & 2 \\ 1 & 5 \\ 1 & 7 \\ 1 & 8 \end{bmatrix}
+  \begin{bmatrix} \beta_1 \\ \beta_2 \end{bmatrix} = 
+  \begin{bmatrix} 1 & 1 & 1 & 1 \\ 2 & 5 & 7 & 8 \end{bmatrix} 
+  \begin{bmatrix} 1 \\ 2 \\ 3 \\ 3 \end{bmatrix} 
+  \begin{bmatrix} 9 \\ 57 \end{bmatrix}
+\]
+\[
+  \begin{bmatrix} 4 & 22 \\ 22 & 142 \end{bmatrix} \begin{bmatrix}
+  \beta_1 \\ \beta_2 \end{bmatrix} = \begin{bmatrix} 9 \\ 57 
+  \end{bmatrix}
+\]
+and $\begin{bmatrix} \beta_1 \\ \beta_2 \end{bmatrix} = 
+\begin{bmatrix} \frac{2}{7} \\\\ \frac{5}{14} \end{bmatrix}$ 
+with a least squares regression line of $y = \frac{2}{7} + 
+\frac{5}{14}x$ \\\\
+The output, $y$ is modeled as a linear combination of the 
+input features present, which leads to a linear system 
+that consists of a design matrix containing the linearly dependent 
+data, where each linearly dependent variable consists of its own 
+column on a design matrix 
+\subsection{Formulating Regression of a Linear System}
+For example, if $y$ depended on $u$ and $v$ linearly, then a design 
+matrix with additional columns would have to be introduced, where 
+each columns contains the linearly dependent variable 
+\[
+  \begin{bmatrix} 1 & u_1 & v_1 \\ 
+    1 & u_2 & v_2 \\ \vdots & \vdots & \vdots \\ 
+    1 & u_n & v_n \end{bmatrix} \begin{bmatrix} 
+  \beta_1 \\ \beta_2 \\ \beta_3 \end{bmatrix} = 
+  \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}
+\]
+\section{Gram Schmidt}
+\textbf{Gram Schmidt} is a method used to find the 
+orthogonal or orthonormal basis of a given subspace \\\\
+Gram Schmidt uses a set of linearly independent vectors that span 
+a given subspace to construct an orthogonal or orthonormal basis
+\subsection{Gram Schmidt orthonormalization}
+Every subspace of $\mathbb{R}^n$ has an orthonormal basis. \\\\
+Given a basis $(a_1, \dots, a_m)$ that produce an orthogonal basis 
+of $(b_1, \dots, b_m)$ and an orthonormal basis $(q_1, \dots, q_m)$, 
+then 
+\[
+  \begin{aligned}
+    $b_1 &= a_1$, $q_1 = \frac{b_1}{||b_1||}$ \\
+    $b_2 &= a_2 - proj_{span(q_1)}(a_2) \text{ where } 
+    proj_{span(q_1)}(a_2) = (a_2 q_1)q_1, q_2 = \frac{b_2}{||b_2||}$ \\ 
+    $b_3 &= a_3 - proj_{span(q_1), span(q_2)}(a_3) \text{ where }
+    proj_{span(q_1), span(q_2)}(a_3) = (a_3 \cdot q_1)q_1 + (a_3 \cdot q_2)q_2, q_3 = \frac{b_3}{||b_3||}$ \\
+    \dots
+  \end{aligned}
+\]
+where $span(q_1, \dots, q_i) = span(a_1, \dots, a_i)$ for 
+$i = 1, \dots, m$ and $q_j \notin span(a_1, \dots, a_i)$ for all $j > i$
+\subsection{Gram Schmidt Example}
+Suppose $V = span(\begin{bmatrix} 2 \\ 1 \\ 2 \end{bmatrix}, 
+\begin{bmatrix} 0 \\ 0 \\ 3 \end{bmatrix})$. Use Gram-Schmidt to figure out an orthonormal basis of $V$ \\\\
+Let $b_1 = \begin{bmatrix} 2 \\ 1 \\ 2 \end{bmatrix}$ and 
+$q_1 = \frac{b_1}{||b_1||} = \frac{1}{3} \begin{bmatrix} 2 \\ 1 \\ 2 
+\end{bmatrix}$
+\[
+  b_2 = \begin{bmatrix} 0 \\ 0 \\ 3 \end{bmatrix} - (\begin{bmatrix}
+0 \\ 0 \\ 3 \end{bmatrix} \cdot \frac{1}{3} 
+\begin{bmatrix} 2 \\ 1 \\ 2 \end{bmatrix}) \frac{1}{3} \begin{bmatrix}
+2 \\ 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 3 \end{bmatrix} 
+- \frac{2}{3} \begin{bmatrix} 2 \\ 1 \\ 2 \end{bmatrix} = 
+\begin{bmatrix} -\frac{4}{3} \\\\ -\frac{2}{3} \\\\ \frac{5}{3} \end{bmatrix}
+\]
+Gram Schmidt allows the normliazation of $b_2$, where $q_2 = \frac{
+  b_2}{||b_2||} = \frac{1}{\sqrt{45}} \begin{bmatrix} -4 \\ -2 \\ 5
+  \end{bmatrix}$
+\subsection{QR decomposition}
+There exists an $m \times n$ matrix $Q$ with orthonormal columns and an upper triangular $n \times n$ invertible matrix $R$, such that $A = QR$, given that $A$ is an $m \times n$ matrix of rank $n$.
+\subsubsection{QR decomp example}
+Find the QR decomposition of $A = \begin{bmatrix} 1 & 2 & 4 \\ 
+0 & 0 & 5 \\ 0 & 3 & 6 \end{bmatrix}$ 
+\begin{enumerate}
+  \item Apply Gram Schmidt on columns of $A$ 
+    \[
+      q_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, 
+      b_2 = \begin{bmatrix} 2 \\ 0 \\ 3 \end{bmatrix} - 
+      (\begin{bmatrix} 2 \\ 0 \\ 3 \end{bmatrix} \cdot 
+      \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}) \begin{bmatrix}
+      1 \\ 0 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 3 
+      \end{bmatrix} \rightarrow q_2 = \begin{bmatrix} 0 \\ 0 \\ 1 
+    \end{bmatrix}
+    \]
+  \item where $b_3 = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix} 
+    - (\begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix} \cdot 
+    \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}) \begin{bmatrix} 1 \\ 0 
+    \\ 0 \end{bmatrix} - (\begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix} 
+    \cdot \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}) \begin{bmatrix}
+    0 \\ 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 5 \\ 0 \end{bmatrix}
+    \rightarrow q_3 = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}$  
+\end{enumerate}
+  where $Q = \begin{bmatrix} q_1 & q_2 & q_3 \end{bmatrix} = 
+  \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix} 
+  \rightarrow R = Q^TA = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \\ 
+    0 & 1 & 0 \end{bmatrix} \begin{bmatrix} 1 & 2 & 4 \\ 0 & 0 & 5 
+    \\ 0 & 3 & 6 \end{bmatrix} = \begin{bmatrix} 1 & 2 & 4 \\ 
+  0 & 3 & 6 \\ 0 & 0 & 5 \end{bmatrix}$
+\section{Spectral Theorem}
+\begin{itemize}
+  \item For symmetrical $n \times n$ matrix $A$, $A$ has an orthonormal basis of eigenvectors
+  \item For the same $A$, there is a diagonal matrix $D$ and a matrix $Q$   with orthonormal columns such that $A = QDQ^T$ 
+\end{itemize}
+\subsection{Spectral Theorem v.s. Diagonalization}
+Diagonalization occurs when a matrix transforms into a 
+diagonal matrix through a change in eigenbasis using its eigenvectors. 
+It is written as $A = PDP^{-1}$ where, $D$ represents the diagonal matrix of eigenvalues, $\lambda_1, \lambda_2, \dots, \lambda_n$ and $P$ represents a matrix whose columns are the eigenvectors of $A$. \\\\
+\textbf{Spectral Theorem} is a more powerful form of diagonalization, where a real symmetrical matrix can become diagonalizable with a \emph{orthogonal} matrix, $Q$, whose columns are orthonormal eigenvectors of $A$ with $D$ representing a diagonal matrix of real eigenvalues,  
+$\lambda_i \in \mathbb{R}^{n}$ \\\\
+Given that diagonalization is indeed a change in an eigenbasis, 
+spectral theorem is a change in an orthogonal eigenbasis. \\\\
+This makes spectral theorem easier to compute because the transpose is taken, rather than the inverse, unlike diagonalization
+\subsection{Example}
+1. Suppose $A$ is an $n \times n$ matrix with an orthonormal eigenbasis, is it symmetric? 
+\[
+  A^T = (QDQ^T)^T = (Q^T)^TD^TQ^T = QDQ^T = A
+\]
+This simply says that the $A^T = A$, which means $A$ is symmetric, proving that $A$ must be symmetric for spectral theorem to work. \\\\
+2. Let $A = \begin{bmatrix} 3 & 1 \\ 1 & 3 \end{bmatrix}$. Write 
+  $A$ as $QDQ^T$, where $D$ is diagonal and $Q$ has orthonormal columns. 
+\\\\ Determine $A$'s eigenvalues through the characteristic equation
+\[
+  det(A - \lambda I) = 0 - (3 - \lambda)^2 = 0, \text{ where } 
+  \lambda = 2, 4
+\]
+Use the eigenvalues to find the eigenvectors, which can then be normalized to find the orthonormal eigenvectors. 
+\[
+  \begin{aligned}
+    \lambda_1 = 2 &\rightarrow v = \begin{bmatrix} 1 \\ -1 \end{bmatrix} \\
+    \lambda_2 = 4 &\rightarrow v = \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+  \end{aligned}
+\]
+Normalize to find the orthonormal eigenvectors, which merge into $Q$ 
+\[
+  \begin{aligned}
+    q_1 &= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 \\ -1 \end{bmatrix} \\
+    q_2 &= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+  \end{aligned}
+\]
+where 
+\[
+  Q = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix}, 
+  D = \begin{bmatrix} 2 & 0 \\ 0 & 4 \end{bmatrix}, 
+  \text{ and } Q^T = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 & -1 \\ 1 & 1 \end{bmatrix}
+\]
+\subsection{Spectral Theorem scales eigenvectors}
+Recall that when a symmetric matrix $A$ is diagonalized as $A = QDQ^T$, 
+it is referred to as the change in orthonormal eigenbasis via $Q^T$, 
+which scales each component by its corresponding eigenvalue $(D)$ 
+and then changing back to the original basis via $A$. \\\\
+The $A$ matrix scales the components of any vector along its eigenvector 
+directions. \\\\
+When expressing vector $\hat{v}$ as a linear combination of eigenvectors (for example, $\hat{v} = -\hat{q}_1 + \frac{1}{2} \hat{q}_2$), 
+the eigenvectors are scaled by $A$. This saves calculations and can 
+instead just scale eigenvector components by eigenvalues.
+\section{SVD - Singular Value Decomposition}
+A \textbf{singular value decomposition} of $A$ is a decomposition 
+where $A = U\Sigma V^T$, where $A$ is an $m \times n$ matrix where 
+\begin{itemize}
+  \item $U$ is an $m \times m$ matrix with orthonormal columns 
+  \item $\Sigma$ is an $m \times n$ rectangular diagonal matrix with 
+    non-negative numbers on the diagonal 
+  \item $V$ is an $n \times n$ matrix with orthonormal columns 
+\end{itemize}
+The diagonal entries $\sigma_i = \Sigma_{ii}$ which are positive are 
+called the \textbf{singular values} of $A$, which are usually arranged 
+in decreasing order, that is $\sigma_1 \geq \sigma_2 \geq \dots$

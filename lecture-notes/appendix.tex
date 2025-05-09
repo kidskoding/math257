@@ -1,0 +1,267 @@
+\newpage
+\appendix
+
+\section{Graphs}
+\textbf{Terminology}
+\begin{itemize}
+  \item \textbf{Node} - an individual point/entity on a graph (also known as a vertex) 
+  \item \textbf{Edge} - a connection between two nodes 
+  \item \textbf{Graph} - a collection of nodes and edges
+\end{itemize}
+A proper graph consists of a set of nodes and a set of edges, formally notated as $(G = VE)$. This means that any collection of nodes and edges is formally conisdered as a graph, where
+\[
+  G = VE, \text{ where V is the set of vertices, and E is the set of edges}
+\]
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+      every node/.style={circle, draw, minimum size=6mm, inner sep=0pt},
+      node distance=8mm and 12mm
+    ]
+    % Nodes
+    \node (1) {1};
+    \node (2) [right=of 3] {2};
+    \node (3) [below=of 4] {3};
+    \node (4) [left=of 5]  {4};
+    \node (5) [above right=of 2] {5};
+    \node (6) [above left=of 4] {6};
+
+    % Edges
+    \draw (4) -- (6);
+    \draw (4) -- (1);
+    \draw (4) -- (3);
+    \draw (3) -- (2);
+    \draw (2) -- (5);
+  \end{tikzpicture}
+  \caption{A small undirected graph on six nodes.}
+  \label{fig:tikz-graph}
+\end{figure}
+\subsection{Adjacency Matrices}
+Consider Figure 1, which shows a graph of 6 nodes and 5 edges. Like any other graph, it can be represented as an adjacency matrix, $A = (a_{ij})$ 
+\[
+  a_{ij} = \begin{cases} 
+    1 & i, j \text{ share common edge} \\
+    0 & \text{else}
+  \end{cases}
+\]
+\textbf{Adjacency Matrix} - a square matrix used to represent the nodes 
+and their connections on any given graph\\\\
+$a_{ij}$ tells us that there exists an edge between two nodes when nodes $i$ and $j$ 
+share a common edge. Or mathematically speaking, 
+\[
+  a_{ij} = 1 \leftrightarrow \exists e \in E : e = \left\{i, j\right\}, 
+  \text{ where $E$ denotes the set of edges}
+\]
+\newpage 
+In the context of Figure 1, we can form an adjancency matrix based on the edges that 
+connect our nodes, by following a series of steps. 
+\begin{enumerate}
+  \item Identify the edges 
+  \item Create a square matrix that orders the rows and columns based on the number of 
+    nodes that exist in the graph. 
+  \begin{itemize}
+    \item $i$ represents the row node and $j$ represents the column node
+    \item Write $0$ if there is no edge that connects between $i$ and $j$, or $1$ 
+      if there is an edge that connects between $i$ and $j$ 
+  \end{itemize}
+\end{enumerate}
+By following these steps, the graph from figure 1 results in an Adjacency Matrix, $A$
+where 
+\[
+  A = \begin{bmatrix}
+    0 & 0 & 0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 1 & 0 & 0 \\
+    1 & 0 & 1 & 0 & 0 & 1 \\
+    0 & 1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 & 0 & 0 
+  \end{bmatrix}
+\]
+\subsection{Walks and Paths}
+A \textbf{walk} consists of a sequence of nodes, $v_0, v_1, v_2, \dots$, where $v_i, v_{i + 1}, \dots$ share an edge and a \textbf{path} consists of a walk with distinct nodes 
+in $G = (V, E)$ \\\\
+In a sequence of vertices, $W = (v_0, v_1, \dots, v_k)$, a \textbf{walk} exists  
+when there exists an edge connecting two nodes in every step along $W$
+\[
+  W \text{ is a walk } \leftrightarrow \forall i \in \{1, \dots, k\}, \exists e \in 
+  E : e = \{v_{i - 1}, v_i\}
+\] 
+Similarly speaking, let $P = (v_0, v_1, \dots, v_k)$ represent a sequence of vertices 
+in $G = (V, E)$. Then $P$ is a path of length $k$ if and only if $v_i \neq v_j$
+\[
+  P \text{ is a path } \leftrightarrow (\forall 1 \leq i \leq k, \{v_{i - 1}, 
+  v_i\} \in E) \text{ and } (v_i \neq v_j) \text{ for all } 0 \leq i < j \leq k
+\]
+\subsection{Directed Graph}
+\textbf{Directed Graph} - a graph where each edge has its own orientation/direction. 
+\begin{center}
+\begin{tikzpicture}[->, >=Stealth, node distance=2cm, every node/.style={circle, draw, minimum size=1cm}]
+  \node (A) {A};
+  \node (B) [right of=A] {B};
+  \node (C) [below of=A] {C};
+  \node (D) [below of=B] {D};
+
+  \draw (A) -- (B);
+  \draw (A) -- (C);
+  \draw (B) -- (D);
+  \draw (C) -- (D);
+  \draw (D) to[bend left] (A);
+\end{tikzpicture}
+\end{center}
+The graph above represents a directed graph, with nodes $A$, $B$, $C$, and $D$ with 
+directed edges that point to other nodes. 
+\subsubsection{Edge-Node Incidence Matrices}
+Since the edges are directed, we can describe how the edges connected 
+to the nodes through an edge-node incidence matrix (or simply an incidence matrix). \\\\
+\textbf{Incidence Matrix} - A matrix that describes how edges are connected to nodes on a graph, specifically speaking a directed graph \\\\ 
+In an incidence matrix, there exists an adjacency matrix, $a_{ij}$, 
+with the values $-1$, $0$, and $1$, where
+\[
+  a_{ij} = \begin{cases}
+    -1 & \text{ edge $i$ leaves node $j$} \\
+    +1 & \text{ edge $i$ enters node $j$} \\
+    0 & \text{ otherwise}
+  \end{cases}
+\]
+This forms the incidence matrix, $A$, where 
+\[
+  A = \begin{bmatrix}
+    -1 & 1 & 0 & 0 \\
+    -1 & 0 & 1 & 0 \\
+    0 & 1 & -1 & 0 \\
+    0 & -1 & 0 & 1
+  \end{bmatrix}
+\]
+\subsection{Proving Graph Theorems}
+Given a directed graph, $G$ and its edge-node incidence matrix, $A$, 
+then dim(Nul($A$)) = the number of connected components. \\\\
+We can prove this theorem by using the 0 vector, where
+\[
+  \vec{0} = \vec{A}x = A \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} = \\
+  \begin{bmatrix} -x_1 + x_2 \\ -x_1 + x_3 \\ -x_2 + x_4 \\ -x_3 + x_4 \end{bmatrix}
+\]
+Or simply speaking, 
+\[
+  \vec{0} = 
+  \begin{bmatrix} -x_1 + x_2 \\ -x_1 + x_3 \\ x_2 - x_3 \\ -x_2 + x_4 \\ -x_3 + x_4 \end{bmatrix}
+\]
+With this, we can derive the following solutions 
+\[
+\begin{aligned}
+  x_1 = x_2 \\
+  x_1 = x_3 \\ 
+  x_2 = x_3 \\
+  x_2 = x_4 \\
+  x_3 = x_4
+\end{aligned}
+\]
+Where, the Nul($A$) = span($\begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}$) 
+\subsubsection{Example Proof}
+Given the directed graph, $G$, where $G$ represents the graph below 
+\begin{center}
+\begin{tikzpicture}[->, >=Stealth, node distance=2cm, every node/.style={circle, draw, minimum size=1cm}]
+  \node (1) {1};
+  \node (3) [below of=1] {3};
+  \node (2) [right of=1] {2};
+  \node (4) [below of=2] {4};
+
+  \draw (1) -- (3);
+  \draw (2) -- (4);
+\end{tikzpicture}
+\end{center}
+There are two connected components, where $Nul(A)$ forms the basis $B$, where $B$ =  
+\{$\begin{bmatrix}1 \\ 0 \\ 1 \\ 0\end{bmatrix}, \begin{bmatrix}0 \\ 1 \\ 0 \\ 1 
+\end{bmatrix}$\}. \\\\
+We can prove this basis by forming the resulting matrix and solving for its variables by setting it equal to the zero vector, $\vec{0}$
+\[
+  \begin{aligned}
+    &A\vec{x} = \vec{0} \\ 
+    &A = \begin{bmatrix}
+        -1 & 0 & 1 & 0 \\ 
+        0 & -1 & 0 & 1
+    \end{bmatrix} \\
+    &\vec{0} = \begin{bmatrix}
+      -x_1 + x_3 \\
+      -x_2 + x_4 
+    \end{bmatrix} \\
+    &x_1 = x_3 \\ 
+    &x_2 = x_4
+  \end{aligned}
+\]
+\subsection{Cycles, Cycle Vectors, and Cycle Spaces}
+A \textbf{cycle} is a closed path in a graph, where its sequence of vertices and edges include the same vertex at the start and end of said sequence. Only the first and last vertices are equal \\\\
+Consider the graph below,
+\begin{center}
+\begin{tikzpicture}[->, >=Stealth, node distance=2cm, every node/.style={circle, draw, minimum size=1cm}]
+  \node (A) {A};
+  \node (B) [right of=A] {B};
+  \node (C) [below of=A] {C};
+  \node (D) [below of=B] {D};
+
+  \draw (A) -- (B);
+  \draw (A) -- (C);
+  \draw (B) -- (D);
+  \draw (C) -- (D);
+  \draw (D) to[bend left] (A);
+\end{tikzpicture}
+\end{center}
+\textbf{Cycle Vector} - A vectorized representation of a cycle in a graph, which records which edges are part of that cycle and in which direction they are traversed \\\\
+Recall $a_{ij}$, where $a_{ij}$ represents the connection between 
+nodes $i$ and $j$
+\[
+  a_{ij} = \begin{cases}
+    -1 & \text{ edge $i$ leaves node $j$} \\
+    +1 & \text{ edge $i$ enters node $j$} \\
+    0 & \text{ otherwise}
+  \end{cases}
+\]
+A cycle, $c$, exists between $A \rightarrow C \rightarrow D \rightarrow A$. Its incidence matrix,  
+\[
+  A = \begin{bmatrix} -1 & 1 & 0 & 0 \\ -1 & 0 & 1 & 0 
+\\ 0 & 1 & -1 & 0 \\ 0 & -1 & 0 & 1 \end{bmatrix} 
+\]. Given the resulting cycle vector for $c$ 
+\[
+  c = \begin{bmatrix} 0 \\ 0 \\ 1 \\ 1 \\ 1 \end{bmatrix}
+\] 
+By deriving the cycle vectors for every cycle, we get the \textbf{cycle space}, which is the span of cycle vectors. \\\\
+Assume a generic graph $G$ is a directed graph with an incidence matrix $A$. Prove that the cycle space of $G$ = $Nul(A^T)$ \\\\
+Recall that the null space of a matrix is the set of all vectors, $\vec{x}$, such that $A\vec{x} = 0$. 
+\[
+  \vec{0} = A^T\vec{y} = \begin{bmatrix} -1 & -1 & 0 & 0 & 0 \\ 
+    1 & 0 & 1 & -1 & 0 \\ 0 & 1 & -1 & 0 & -1 \\ 0 & 0 & 0 & 1 & 1 
+  \end{bmatrix}\vec{y}
+\]
+And therefore, the $RREF_{A}$, reduced row echelon form of $A$, is equal to 
+\[
+  \begin{bmatrix}
+    -1 & -1 & 0 & 0 & 0 \\
+    0 & -1 & 1 & -1 & 0 \\ 
+    0 & 0 & 0 & -1 & -1 \\
+    0 & 0 & 0 & 0 & 0
+  \end{bmatrix}
+\]
+Use $RREF_A$ to form the solution vector, which results in 
+\[
+  \begin{bmatrix}
+    r \\
+    s \\ 
+    -s \\ 
+    r + s \\
+    -r - s \\
+  \end{bmatrix}
+\]
+This forms a nullspace, where Nul($A^T$) = \{\begin{bmatrix}
+  -r - s \\ 
+  r + s \\ 
+  r \\ 
+  -s \\
+  s
+\end{bmatrix}, where $r, s \in \mathbb{R}$\}, which results in the 
+cycle space of 
+\[
+  span\{\begin{bmatrix} -1 \\ 1 \\ 1 \\ 0 \\ 0 \end{bmatrix}, 
+  \begin{bmatrix} -1 \\ 1 \\ 0 \\ -1 \\ 1 \end{bmatrix}\}
+\]
+
+\section{Linear Differential Equations}
